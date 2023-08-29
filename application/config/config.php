@@ -24,9 +24,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |
 */
 
-// $config['base_url'] = 'http://virtual.unihorizonte.edu.co:9000/proyectosunihorizonte';
+$config['base_url'] = 'http://virtual.unihorizonte.edu.co:9000/proyectosunihorizonte';
+// $config['base_url'] = 'http://virtual.unihorizonte.edu.co/proyectosunihorizonte';
 
-$config['base_url'] = 'http://proyectosunihorizonte';
+// $config['base_url'] = 'http://proyectosunihorizonte';
 
 /*
 |--------------------------------------------------------------------------
@@ -38,7 +39,8 @@ $config['base_url'] = 'http://proyectosunihorizonte';
 | variable so that it is blank.
 |
 */
-$config['index_page'] = '';
+// $config['index_page'] = '';
+$config['index_page'] = 'index.php';
 
 /*
 |--------------------------------------------------------------------------
@@ -226,7 +228,7 @@ $config['allow_get_array'] = TRUE;
 | your log files will fill up very fast.
 |
 */
-$config['log_threshold'] = 0;
+$config['log_threshold'] = 4;
 
 /*
 |--------------------------------------------------------------------------
@@ -237,7 +239,7 @@ $config['log_threshold'] = 0;
 | application/logs/ directory. Use a full server path with trailing slash.
 |
 */
-$config['log_path'] = '';
+$config['log_path'] = 'C:/wamp64/www/proyectosunihorizonte/application/logs';
 
 /*
 |--------------------------------------------------------------------------

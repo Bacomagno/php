@@ -17,6 +17,7 @@ class Common_model_status extends Model_common {
         $this->db->where('system_name', $this->session->userdata('sysname'));
         $this->db->order_by($this->order_column, $this->order);
         return $this->db->get($this->view)->result();
+        echo "model status"
     }
     
     // Custom function for this controller

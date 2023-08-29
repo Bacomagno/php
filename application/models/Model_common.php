@@ -160,7 +160,10 @@ class Model_common extends CI_Model {
     // Obtener el listado de productos general
     function get_productos($param = "") {
 
-        $sql = "SELECT om_productos_lista_colciencias.nombre_tipo_producto, om_productos_lista_colciencias.categoria, om_productos_lista_colciencias.peso, om_productos.proyecto FROM om_productos,om_productos_lista_colciencias WHERE om_productos.producto_colciencias = om_productos_lista_colciencias.id_producto_lista_colciencias AND om_productos.borrado <> 1 ORDER BY categoria ASC";        
+        $sql = "SELECT om_productos_lista_colciencias.nombre_tipo_producto, om_productos_lista_colciencias.categoria, om_productos_lista_colciencias.peso, om_productos.proyecto 
+                FROM om_productos,om_productos_lista_colciencias 
+                WHERE om_productos.producto_colciencias = om_productos_lista_colciencias.id_producto_lista_colciencias 
+                AND om_productos.borrado <> 1 ORDER BY categoria ASC";        
         $query = $this->db->query($sql);
         return $query->result_array();
         

@@ -540,7 +540,7 @@ if ( ! function_exists('set_status_header'))
 				429	=> 'Too Many Requests',
 				431	=> 'Request Header Fields Too Large',
 
-				500	=> 'Internal Server Error',
+				500	=> 'Internal Server Error common',
 				501	=> 'Not Implemented',
 				502	=> 'Bad Gateway',
 				503	=> 'Service Unavailable',

@@ -11,7 +11,9 @@ var orderedColumns = [
 ];
 
 $(document).ready(function () {
-    
+
+    // $.getScript(location.protocol + '//' + location.host + '/' + '/assets/js' + commonMode + '.js', function () {
+    // $.getScript(location.protocol + '//' + location.host + '/' + 'index.php' + '/assets/js' + commonMode + '.js', function () {
     $.getScript(location.protocol + '//' + location.host + '/' + location.pathname.split("/")[1] + '/assets/js/' + commonMode + '.js', function(){
         
         // AllowEdit Add, Edit, Copy, Delete

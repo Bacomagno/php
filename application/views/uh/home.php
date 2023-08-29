@@ -103,7 +103,7 @@ foreach ($proyectos_anual as $value) {
 ?>
 
 <div class="w3-container w3-margin w3-card w3-section w3-light-grey w3-animate-bottom">
-    <h1 class="w3-xxlarge w3-text-theme">Indicadores Jhon si</h1>
+    <h1 class="w3-xxlarge w3-text-theme">Indicadores</h1>
     <!--<h2>Grupos UH</h2>-->
 
     <div class="w3-container">
