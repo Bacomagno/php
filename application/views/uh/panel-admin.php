@@ -61,6 +61,7 @@ $b = $b[3];
                         <a class="w3-bar-item w3-button" onclick="loadContent('#content_selected', 'lineas_facultad_lista');">Líneas por facultad</a>
                         <a class="w3-bar-item w3-button" onclick="loadContent('#content_selected', 'programa_academico_lista');">Programa académico</a>
                         <a class="w3-bar-item w3-button" onclick="loadContent('#content_selected', 'lineas_por_programa');">Líneas por programa</a>
+                        <a class="w3-bar-item w3-button" onclick="loadContent('#content_selected', 'lista_prueba');">Pruebas</a>
                     </div>
                     
                     <div class="w3-bar-item w3-button" onclick="myAccFunc('demoAcc2')">

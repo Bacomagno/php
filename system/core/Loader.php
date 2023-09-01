@@ -912,7 +912,7 @@ class CI_Loader {
 
 		if ( ! $file_exists && ! file_exists($_ci_path))
 		{
-			show_error('Unable to load the requested file: '.$_ci_file);
+			show_error('Unable to load the requested file 3: '.$_ci_file);
 		}
 
 		// This allows anything loaded using $this->load (views, files, etc.)

@@ -9,7 +9,7 @@ class Common_panel_admin extends Main {
     
     var $systemid;
     var $groupid;
-    
+
     function __construct() {
         parent::__construct();
         if(isset($_SESSION["system"])){
@@ -96,15 +96,13 @@ class Common_panel_admin extends Main {
             $data['estado_proyectos'] = $this->model->get_estado_proyectos();
             $data['proyectos_anual'] = $this->model->get_proyectos_anual();
             
-            $this->load->view($this->session->userdata('folder') . '/' . $param, $data);
-            
+            $this->load->view($this->session->userdata('folder') . '/' . $param, $data);            
         }else{
             
-            $this->load->view($this->session->userdata('folder') . '/' . $param);
-            
+            $this->load->view($this->session->userdata('folder') . '/' . $param);            
         }
         
-    }
+    }    
     
     public function add() {
         
@@ -569,7 +567,6 @@ class Common_panel_admin extends Main {
             $error = array('error' => $this->upload->display_errors());
             
             print_r($error);
-            var_dump($this->upload->data());
             
             return false;    
         } else {

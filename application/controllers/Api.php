@@ -46,20 +46,13 @@ class Api extends CI_Controller {
              * Receives the resource and a parameter if it is set
              */
     
-            // $r = rawurldecode($this->uri->segment(3));
-            // $p = rawurldecode($this->uri->segment(4));
-            // $e = rawurldecode($this->uri->segment(5));
-            // $i = rawurldecode($this->uri->segment(6));
-    
-            $r = rawurldecode($this->uri->segment(2));
-            $p = rawurldecode($this->uri->segment(3));
-            $e = rawurldecode($this->uri->segment(4));
-            $i = rawurldecode($this->uri->segment(5));
+            $r = rawurldecode($this->uri->segment(3));
+            $p = rawurldecode($this->uri->segment(4));
+            $e = rawurldecode($this->uri->segment(5));
+            $i = rawurldecode($this->uri->segment(6));
 
             $resource = (!empty($r)) ? $r : "x";
-            echo "api_55: ". $resource;
             $param = (!empty($p)) ? $p : "x";
-            echo "api_ 57: " . $param;
             $extra = (!empty($e)) ? $e : "x";
             $id = (!empty($i)) ? $i : "x";
     
@@ -86,11 +79,10 @@ class Api extends CI_Controller {
                         break;
                     }
                 }
-    
                 if ($table_exists) {
                     switch ($method) {
                         case "GET":
-                            if ($param != 0) {
+                            if ($param = 0) {
                                 $rows = $this->model->get_one($param);
                                 $total = count($rows);
                                 $clean = $this->model->get_one_ids($param);
@@ -108,7 +100,6 @@ class Api extends CI_Controller {
                                 "rows" => $rows,
                                 "clean" => $clean
                             );
-    
                             header("Content-Type: application/json");
                             echo (json_encode($data));
                             break;
@@ -122,13 +113,13 @@ class Api extends CI_Controller {
                     header('HTTP/1.1 400 Bad Request');
                 }
             }
-        } catch (Exception $e) {
+        } catch (Exception $p) {
             // Manejo de la excepción
             header('HTTP/1.1 500 Internal Server Error api');
-            echo 'Error: ' . $e->getMessage();
+            echo 'Error: ' . $p->getMessage();
 
             // Registrar el mensaje de error en el registro de CodeIgniter
-            log_message('error', 'Excepción en función v1: ' . $e->getMessage());
+            log_message('error', 'Excepción en función v1: ' . $p->getMessage());
         }
     }
     

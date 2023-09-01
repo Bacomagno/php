@@ -13,51 +13,65 @@ class Model_common extends CI_Model {
     }
     
     function construct($t){
+        try{
         
-        // Assing the current table name
-        $this->table = $t;
-        
-        // Get the current table id
-        $described = $this->describe_table($this->table);
-        foreach ($described as $row) {
-            if($row["Key"] === "PRI"){
-                $this->table_id = $row["Field"];
-                break;
-            }
+            // Assing the current table name
+            $this->table = $t;
             
+            // Get the current table id
+            $described = $this->describe_table($this->table);
+            foreach ($described as $row) {
+                if($row["Key"] === "PRI"){
+                    $this->table_id = $row["Field"];
+                    break;
+                }
+
+            }
+        }
+        catch(Exception $e) {
+            header('Error Mode_common');
+            echo 'Error: ' . $e->getMessage();
+            log_message('Error', 'Error common' . $e->getMessage());
         }
     }
     
     public function get_one_consecutivo($id = 0) {
+        try{
 
-        // Find the primary key and allowed fields
-        $self = $this->describe_table($this->table);
-        
-        $pk = '';
-        $fields = array();
-        
-        foreach ($self as $s) {
+            // Find the primary key and allowed fields
+            $self = $this->describe_table($this->table);
             
-            if(strcmp($s["Key"], "PRI") == 0){
-                $pk = $s["Field"];
+            $pk = '';
+            $fields = array();
+            
+            foreach ($self as $s) {
+
+                if(strcmp($s["Key"], "PRI") == 0){
+                    $pk = $s["Field"];
+                }
+
+                if(strpos($s["Field"], "password") === false){
+                    array_push($fields, $s["Field"]);
+                }
+
             }
-            
-            if(strpos($s["Field"], "password") === false){
-                array_push($fields, $s["Field"]);
+
+            if(strcmp($pk, "") >= 0){
+                $this->db->select(join(", ", $fields));
+                $this->db->where($pk, $id);
+                $this->db->where($this->table . ".borrado", 0);
+                if($this->table === "om_users"){
+                    $this->db->where("om_users.system_id", $_SESSION["system"]);
+                }
+                return $this->db->get($this->table)->result_array();
+            }else{
+                return array();
             }
-            
         }
-        
-        if(strcmp($pk, "") >= 0){
-            $this->db->select(join(", ", $fields));
-            $this->db->where($pk, $id);
-            $this->db->where($this->table . ".borrado", 0);
-            if($this->table === "om_users"){
-                $this->db->where("om_users.system_id", $_SESSION["system"]);
-            }
-            return $this->db->get($this->table)->result_array();
-        }else{
-            return array();
+        catch(Exception $e) {
+            header('Error Mode_common');
+            echo 'Error: ' . $e->getMessage();
+            log_message('Error', 'Error common' . $e->getMessage());
         }
         
     }
@@ -68,22 +82,28 @@ class Model_common extends CI_Model {
     }
     
     function update($id, $data) {
+        try{
         
-        // Actualiza
-        $this->db->set($data);
-        $this->db->where($this->table_id, $id);
-        $this->db->update($this->table);
-        
-        // Determina si se actualizó o no.
-        $result = $this->db->conn_id->info;
-        $result = explode(" ", $result);
-        
-        if(intval($result[2]) === 0){
-            return false;
-        }else{
-            return true;
+            // Actualiza
+            $this->db->set($data);
+            $this->db->where($this->table_id, $id);
+            $this->db->update($this->table);
+            
+            // Determina si se actualizó o no.
+            $result = $this->db->conn_id->info;
+            $result = explode(" ", $result);
+            
+            if(intval($result[2]) === 0){
+                return false;
+            }else{
+                return true;
+            }
         }
-        
+        catch(Exception $e) {
+            header('Error Mode_common');
+            echo 'Error: ' . $e->getMessage();
+            log_message('Error', 'Error common' . $e->getMessage());
+        }
     }
 
     function delete($id) {

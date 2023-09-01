@@ -6,13 +6,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 require APPPATH . 'controllers/common/Common_panel_admin.php';
 
 class Panel_admin extends Common_panel_admin {
-    
+
     function __construct() {
         parent::__construct();
     }
         
     public function add() {
-        
+
         $this->checkLogin();
         $this->loadLang();
         
@@ -24,6 +24,7 @@ class Panel_admin extends Common_panel_admin {
         // Carga el modelo requerido
         $this->load->model("model_common", 'model');
         $this->model->construct("om_" . $current_table);
+        echo " -panel_admin_27: " . $current_table;
         
         if (null !== $this->input->post() && !empty($this->input->post())) {
             

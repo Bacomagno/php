@@ -1,0 +1,833 @@
+-- phpMyAdmin SQL Dump
+-- version 4.1.14
+-- http://www.phpmyadmin.net
+--
+-- Servidor: 127.0.0.1
+-- Tiempo de generación: 04-08-2020 a las 15:34:52
+-- Versión del servidor: 5.6.17
+-- Versión de PHP: 5.5.12
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+
+--
+-- Base de datos: `gestion_uh`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `om_avances`
+--
+
+CREATE TABLE IF NOT EXISTS `om_avances` (
+  `id_avance` int(11) NOT NULL AUTO_INCREMENT,
+  `nombre_avance` varchar(255) NOT NULL,
+  `proyecto` int(11) NOT NULL,
+  `presupuesto_ejecutado` double NOT NULL,
+  `fecha_entrega` date NOT NULL,
+  `archivo_avance` varchar(255) NOT NULL,
+  `borrado` int(11) NOT NULL DEFAULT '0',
+  `log_accion` varchar(255) NOT NULL DEFAULT 'add',
+  `log_usuario` varchar(255) DEFAULT 'No',
+  `log_timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id_avance`),
+  KEY `proyecto` (`proyecto`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=51 ;
+
+--
+-- Volcado de datos para la tabla `om_avances`
+--
+
+INSERT INTO `om_avances` (`id_avance`, `nombre_avance`, `proyecto`, `presupuesto_ejecutado`, `fecha_entrega`, `archivo_avance`, `borrado`, `log_accion`, `log_usuario`, `log_timestamp`) VALUES
+
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `om_docentes_grupos_unihorizonte`
+--
+
+CREATE TABLE IF NOT EXISTS `om_docentes_grupos_unihorizonte` (
+  `id_grupo` int(11) NOT NULL AUTO_INCREMENT,
+  `proyecto` int(11) NOT NULL,
+  `docente` int(11) NOT NULL DEFAULT '1',
+  `borrado` int(11) NOT NULL DEFAULT '0',
+  `log_accion` varchar(255) NOT NULL DEFAULT 'add',
+  `log_usuario` varchar(255) NOT NULL DEFAULT 'No',
+  `log_timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id_grupo`),
+  KEY `proyecto` (`proyecto`),
+  KEY `estudiante` (`docente`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=18 ;
+
+--
+-- Volcado de datos para la tabla `om_docentes_grupos_unihorizonte`
+--
+
+INSERT INTO `om_docentes_grupos_unihorizonte` (`id_grupo`, `proyecto`, `docente`, `borrado`, `log_accion`, `log_usuario`, `log_timestamp`) VALUES
+
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `om_estado_proyecto`
+--
+
+CREATE TABLE IF NOT EXISTS `om_estado_proyecto` (
+  `id_estado` int(11) NOT NULL AUTO_INCREMENT,
+  `nombre_estado` varchar(255) NOT NULL,
+  `borrado` int(11) NOT NULL DEFAULT '0',
+  `log_accion` varchar(255) NOT NULL DEFAULT 'add',
+  `log_usuario` varchar(255) DEFAULT 'No',
+  `log_timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id_estado`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
+
+--
+-- Volcado de datos para la tabla `om_estado_proyecto`
+--
+
+INSERT INTO `om_estado_proyecto` (`id_estado`, `nombre_estado`, `borrado`, `log_accion`, `log_usuario`, `log_timestamp`) VALUES
+
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `om_estudiantes`
+--
+
+CREATE TABLE IF NOT EXISTS `om_estudiantes` (
+  `id_estudiante` int(11) NOT NULL AUTO_INCREMENT,
+  `nombres_estudiante` varchar(255) NOT NULL,
+  `documento_estudiante` varchar(255) NOT NULL,
+  `borrado` int(11) NOT NULL DEFAULT '0',
+  `log_accion` varchar(255) NOT NULL DEFAULT 'add',
+  `log_usuario` varchar(255) NOT NULL DEFAULT 'No',
+  `log_timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id_estudiante`) USING BTREE,
+  UNIQUE KEY `documento_estudiante` (`documento_estudiante`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=18085 ;
+
+--
+-- Volcado de datos para la tabla `om_estudiantes`
+--
+
+INSERT INTO `om_estudiantes` (`id_estudiante`, `nombres_estudiante`, `documento_estudiante`, `borrado`, `log_accion`, `log_usuario`, `log_timestamp`) VALUES
+
+
+
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `om_facultades_lista`
+--
+
+CREATE TABLE IF NOT EXISTS `om_facultades_lista` (
+  `facultad_lista_id` int(11) NOT NULL AUTO_INCREMENT,
+  `name_facultad_lista` varchar(255) NOT NULL,
+  `codificacion` varchar(2) NOT NULL,
+  `borrado` int(11) NOT NULL DEFAULT '0',
+  `log_accion` varchar(255) NOT NULL DEFAULT 'add',
+  `log_usuario` varchar(255) DEFAULT 'No',
+  `log_timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`facultad_lista_id`),
+  UNIQUE KEY `nombre_facultad_lista` (`name_facultad_lista`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=8 ;
+
+--
+-- Volcado de datos para la tabla `om_facultades_lista`
+--
+
+INSERT INTO `om_facultades_lista` 
+(`facultad_lista_id`, `name_facultad_lista`, `codificacion`, `borrado`, `log_accion`, `log_usuario`, `log_timestamp`) 
+VALUES
+
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `om_grupos_colciencias_lista`
+--
+
+CREATE TABLE IF NOT EXISTS `om_grupos_colciencias_lista` (
+  `id_grupo_colciencias` int(11) NOT NULL AUTO_INCREMENT,
+  `nombre_grupo` varchar(255) NOT NULL,
+  `lider_grupo` varchar(255) NOT NULL,
+  `codigo_grupo` varchar(255) NOT NULL,
+  `categoria_grupo` varchar(5) NOT NULL,
+  `borrado` int(11) NOT NULL DEFAULT '0',
+  `log_accion` varchar(255) NOT NULL DEFAULT 'add',
+  `log_usuario` varchar(255) NOT NULL DEFAULT 'No',
+  `log_timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id_grupo_colciencias`),
+  UNIQUE KEY `nombre_grupo` (`nombre_grupo`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
+
+--
+-- Volcado de datos para la tabla `om_grupos_colciencias_lista`
+--
+
+INSERT INTO `om_grupos_colciencias_lista` 
+(`id_grupo_colciencias`, `nombre_grupo`, `lider_grupo`, `codigo_grupo`, `categoria_grupo`, `borrado`, `log_accion`, `log_usuario`, `log_timestamp`) 
+VALUES
+
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `om_grupos_unihorizonte`
+--
+
+CREATE TABLE IF NOT EXISTS `om_grupos_unihorizonte` (
+  `id_grupo` int(11) NOT NULL AUTO_INCREMENT,
+  `proyecto` int(11) NOT NULL,
+  `estudiante` int(11) NOT NULL,
+  `borrado` int(11) NOT NULL DEFAULT '0',
+  `log_accion` varchar(255) NOT NULL DEFAULT 'add',
+  `log_usuario` varchar(255) NOT NULL DEFAULT 'No',
+  `log_timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id_grupo`),
+  KEY `proyecto` (`proyecto`),
+  KEY `estudiante` (`estudiante`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=50 ;
+
+--
+-- Volcado de datos para la tabla `om_grupos_unihorizonte`
+--
+
+INSERT INTO `om_grupos_unihorizonte` 
+(`id_grupo`, `proyecto`, `estudiante`, `borrado`, `log_accion`, `log_usuario`, `log_timestamp`) 
+VALUES
+
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `om_languages`
+--
+
+CREATE TABLE IF NOT EXISTS `om_languages` (
+  `language_id` int(11) NOT NULL AUTO_INCREMENT,
+  `language_system` varchar(255) NOT NULL,
+  `language_name` varchar(255) NOT NULL,
+  `borrado` int(11) NOT NULL DEFAULT '0',
+  `log_accion` varchar(255) NOT NULL DEFAULT 'add',
+  `log_usuario` varchar(255) DEFAULT 'No',
+  `log_timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`language_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+
+--
+-- Volcado de datos para la tabla `om_languages`
+--
+
+INSERT INTO `om_languages` 
+(`language_id`, `language_system`, `language_name`, `borrado`, `log_accion`, `log_usuario`, `log_timestamp`) 
+VALUES
+
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `om_lineas_facultad_lista`
+--
+
+CREATE TABLE IF NOT EXISTS `om_lineas_facultad_lista` (
+  `id_linea_facultad_lista` int(11) NOT NULL AUTO_INCREMENT,
+  `nombre_linea_facultad_lista` varchar(255) NOT NULL,
+  `facultad` int(11) NOT NULL,
+  `borrado` int(11) NOT NULL DEFAULT '0',
+  `log_accion` varchar(255) NOT NULL DEFAULT 'add',
+  `log_usuario` varchar(255) DEFAULT 'No',
+  `log_timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id_linea_facultad_lista`),
+  KEY `facultad` (`facultad`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=15 ;
+
+--
+-- Volcado de datos para la tabla `om_lineas_facultad_lista`
+--
+
+INSERT INTO `om_lineas_facultad_lista` 
+(`id_linea_facultad_lista`, `nombre_linea_facultad_lista`, `facultad`, `borrado`, `log_accion`, `log_usuario`, `log_timestamp`) 
+VALUES
+
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `om_lineas_institucionales_lista`
+--
+
+CREATE TABLE IF NOT EXISTS `om_lineas_institucionales_lista` (
+  `id_linea_institucional_lista` int(11) NOT NULL AUTO_INCREMENT,
+  `nombre_linea_institucional` varchar(255) NOT NULL,
+  `descripcion` text NOT NULL,
+  `borrado` int(11) NOT NULL DEFAULT '0',
+  `log_accion` varchar(255) NOT NULL DEFAULT 'add',
+  `log_usuario` varchar(255) DEFAULT 'No',
+  `log_timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id_linea_institucional_lista`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
+
+--
+-- Volcado de datos para la tabla `om_lineas_institucionales_lista`
+--
+
+INSERT INTO `om_lineas_institucionales_lista` (`id_linea_institucional_lista`, `nombre_linea_institucional`, `descripcion`, `borrado`, `log_accion`, `log_usuario`, `log_timestamp`) VALUES
+(1, 'Competitividad, Productividad e Innovación', 'Promueve el estudio y el desarrollo de competencias que permitan participar productivamente y con eficiencia en la comunidad laboral a partir de la resolución creativa de problemáticas con el fin de generar soluciones sobresalientes e innovadoras.', 0, 'edit', 'admin', '2020-01-21 06:01:32'),
+(2, 'Educación para el Desarrollo, la Paz y la Felicidad', 'Problematiza la educación y sus aportes al desarrollo cultural, la paz y la felicidad en los habitantes de una comunidad específica, abarcando los temas de bienestar y satisfacción como motores principales del individuo.', 0, 'edit', 'admin', '2020-01-21 06:01:57'),
+(3, 'Estudios Socioambientales', 'Enmarcada en el cuidado de la salud de las personas, principalmente la población trabajadora y la protección del medio ambiente, aborda la dimensión social relacionada con la seguridad y salud en el trabajo y la problemática ambiental promoviendo las estrategias y métodos apropiados para dar cobertura a los requerimientos de la sociedad en general y de las organizaciones en particular en este campo de investigación.', 0, 'edit', 'admin', '2020-01-21 06:01:13'),
+(4, 'Diseño, estructuración e Ingeniería de Procesos', 'Desarrolla metodologías para la resolución de problemas en el ámbito de ingeniería para la mejora y creación de procesos en diversas industrias de acuerdo a sus necesidades.', 0, 'edit', 'admin', '2020-01-21 06:01:19'),
+(5, 'Producción de conocimiento en entornos virtuales de aprendizaje', 'Utiliza los espacios virtuales, no sólo con fines de formación interna (institucional) y de extensión, sino como medio y como producto en sí mismo, para la generación y comunicación de nuevo conocimiento de forma transversal e interdisciplinar entre los saberes. ', 0, 'edit', 'admin', '2020-01-21 06:01:48');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `om_lineas_por_programa`
+--
+
+CREATE TABLE IF NOT EXISTS `om_lineas_por_programa` (
+  `id_lineas_por_programa` int(11) NOT NULL AUTO_INCREMENT,
+  `nombre_linea_por_programa` varchar(255) NOT NULL,
+  `programa_academico` int(11) NOT NULL,
+  `borrado` int(11) NOT NULL DEFAULT '0',
+  `log_accion` varchar(255) NOT NULL DEFAULT 'add',
+  `log_usuario` varchar(255) DEFAULT 'No',
+  `log_timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id_lineas_por_programa`),
+  KEY `facultad` (`programa_academico`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=32 ;
+
+--
+-- Volcado de datos para la tabla `om_lineas_por_programa`
+--
+
+INSERT INTO `om_lineas_por_programa` (`id_lineas_por_programa`, `nombre_linea_por_programa`, `programa_academico`, `borrado`, `log_accion`, `log_usuario`, `log_timestamp`) VALUES
+
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `om_locks`
+--
+
+CREATE TABLE IF NOT EXISTS `om_locks` (
+  `id_lock` int(11) NOT NULL AUTO_INCREMENT,
+  `id_usuario` int(11) NOT NULL,
+  `nombre_usuario` varchar(255) NOT NULL,
+  `tabla` varchar(255) NOT NULL,
+  `id_registro` int(11) NOT NULL,
+  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `borrado` int(11) NOT NULL DEFAULT '0',
+  `log_accion` varchar(255) NOT NULL DEFAULT 'add',
+  `log_usuario` varchar(255) DEFAULT 'No',
+  `log_timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id_lock`),
+  KEY `usuario` (`id_usuario`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=337 ;
+
+--
+-- Volcado de datos para la tabla `om_locks`
+--
+
+INSERT INTO `om_locks` (`id_lock`, `id_usuario`, `nombre_usuario`, `tabla`, `id_registro`, `timestamp`, `borrado`, `log_accion`, `log_usuario`, `log_timestamp`) VALUES
+(148, 4, 'Diana Tamayo', 'proyectos', 29, '2020-08-03 19:54:40', 0, 'add', 'No', '2020-08-03 19:54:40'),
+(157, 231, 'Luisa Garcia', 'proyectos', 67, '2020-08-03 20:01:14', 0, 'add', 'No', '2020-08-03 20:01:14'),
+(165, 4, 'Diana Tamayo', 'proyectos', 26, '2020-08-03 20:14:05', 0, 'add', 'No', '2020-08-03 20:14:05'),
+(166, 4, 'Diana Tamayo', 'proyectos', 27, '2020-08-03 20:14:34', 0, 'add', 'No', '2020-08-03 20:14:34'),
+(266, 231, 'Luisa Garcia', 'proyectos', 50, '2020-08-04 03:33:40', 0, 'add', 'No', '2020-08-04 03:33:40'),
+(334, 1, 'Administrador', 'proyectos', 1, '2020-08-04 05:37:16', 0, 'add', 'No', '2020-08-04 05:37:16'),
+(335, 1, 'Administrador', 'proyectos', 77, '2020-08-04 12:56:36', 0, 'add', 'No', '2020-08-04 12:56:36');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `om_log`
+--
+
+CREATE TABLE IF NOT EXISTS `om_log` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `usuario` varchar(255) DEFAULT NULL,
+  `fecha_hora` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `evento` text,
+  PRIMARY KEY (`id`),
+  KEY `id` (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=907 ;
+
+--
+-- Volcado de datos para la tabla `om_log`
+--
+
+INSERT INTO `om_log` (`id`, `usuario`, `fecha_hora`, `evento`) VALUES
+
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `om_productos`
+--
+
+CREATE TABLE IF NOT EXISTS `om_productos` (
+  `id_producto` int(11) NOT NULL AUTO_INCREMENT,
+  `proyecto` int(11) NOT NULL,
+  `producto_colciencias` int(11) NOT NULL,
+  `fecha_entrega` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `archivo_producto` varchar(255) NOT NULL,
+  `borrado` int(11) NOT NULL DEFAULT '0',
+  `log_accion` varchar(255) NOT NULL DEFAULT 'add',
+  `log_usuario` varchar(255) DEFAULT 'No',
+  `log_timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id_producto`),
+  KEY `proyecto` (`proyecto`),
+  KEY `producto_colciencias` (`producto_colciencias`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=73 ;
+
+--
+-- Volcado de datos para la tabla `om_productos`
+--
+
+INSERT INTO `om_productos` (`id_producto`, `proyecto`, `producto_colciencias`, `fecha_entrega`, `archivo_producto`, `borrado`, `log_accion`, `log_usuario`, `log_timestamp`) VALUES
+
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `om_productos_lista_colciencias`
+--
+
+CREATE TABLE IF NOT EXISTS `om_productos_lista_colciencias` (
+  `id_producto_lista_colciencias` int(11) NOT NULL AUTO_INCREMENT,
+  `nombre_tipo_producto` varchar(255) NOT NULL,
+  `categoria` varchar(20) NOT NULL,
+  `peso` int(11) NOT NULL,
+  `borrado` int(11) NOT NULL DEFAULT '0',
+  `log_accion` varchar(255) NOT NULL DEFAULT 'add',
+  `log_usuario` varchar(255) DEFAULT 'No',
+  `log_timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id_producto_lista_colciencias`),
+  UNIQUE KEY `categoría` (`categoria`),
+  UNIQUE KEY `tipo_producto` (`nombre_tipo_producto`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=79 ;
+
+--
+-- Volcado de datos para la tabla `om_productos_lista_colciencias`
+--
+
+INSERT INTO `om_productos_lista_colciencias` (`id_producto_lista_colciencias`, `nombre_tipo_producto`, `categoria`, `peso`, `borrado`, `log_accion`, `log_usuario`, `log_timestamp`) VALUES
+
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `om_programa_academico_lista`
+--
+
+CREATE TABLE IF NOT EXISTS `om_programa_academico_lista` (
+  `id_programa_academico` int(11) NOT NULL AUTO_INCREMENT,
+  `nombre_programa_academico` varchar(255) NOT NULL,
+  `codificacion` varchar(2) NOT NULL,
+  `linea_facultad` int(11) NOT NULL,
+  `borrado` int(11) NOT NULL DEFAULT '0',
+  `log_accion` varchar(255) NOT NULL DEFAULT 'add',
+  `log_usuario` varchar(255) DEFAULT 'No',
+  `log_timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id_programa_academico`),
+  KEY `facultad` (`linea_facultad`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=23 ;
+
+--
+-- Volcado de datos para la tabla `om_programa_academico_lista`
+--
+
+INSERT INTO `om_programa_academico_lista` (`id_programa_academico`, `nombre_programa_academico`, `codificacion`, `linea_facultad`, `borrado`, `log_accion`, `log_usuario`, `log_timestamp`) VALUES
+(1, 'Ingeniería Seguridad Industrial e Higiene Ocupacional', '21', 7, 0, 'edit', 'admin', '2019-12-02 17:12:54'),
+(2, 'TP. Seguridad e Higiene Industrial', '22', 7, 0, 'add', 'No', '2019-07-22 22:58:16'),
+(3, 'TP. Procesos Ambientales', '23', 7, 0, 'add', 'No', '2019-07-22 22:58:16'),
+(4, 'TP. Implementación Sistemas Telecomunicaciones', '24', 8, 0, 'add', 'No', '2019-07-22 23:00:15'),
+(5, 'T.P.	Procesos Administrativos', '32', 3, 0, 'edit', 'admin', '2020-01-21 06:01:43'),
+(6, 'Ciencias Básicas (Enseñanza de las Matemáticas y Ciencias Exactas)', '40', 1, 0, 'edit', 'admin', '2020-01-21 06:01:32'),
+(7, 'Ciencias Básicas (Aplicación de las ciencias básicas para el estudio de los fenómenos naturales y ambientales)', '40', 2, 0, 'edit', 'admin', '2020-01-21 06:01:51'),
+(8, 'T.P Procesos de Comercio Exterior', '33', 4, 0, 'add', 'admin', '2020-01-21 06:01:22'),
+(9, 'T.P.	Procesos Financieros Bancarios', '34', 4, 0, 'add', 'admin', '2020-01-21 06:01:52'),
+(10, 'T.P. Procesos de Mercadeo', '31', 4, 0, 'add', 'admin', '2020-01-21 06:01:16'),
+(11, 'T.P.	Diseño Gráfico', '53', 5, 0, 'add', 'admin', '2020-01-21 06:01:41'),
+(12, 'Transversales a todos los programas', '54', 5, 0, 'add', 'admin', '2020-01-21 06:01:17'),
+(13, 'T.P. Construcción de Obra', '55', 6, 0, 'add', 'admin', '2020-01-21 10:01:13'),
+(14, 'Especialización en gerencia de Seguridad y Salud en el trabajo', '25', 9, 0, 'add', 'admin', '2020-01-21 10:01:47'),
+(15, 'Administración de Empresas', '35', 10, 0, 'add', 'admin', '2020-01-21 10:01:23'),
+(16, 'Derecho', '36', 10, 0, 'add', 'admin', '2020-01-21 10:01:42'),
+(17, 'Contabilidad', '37', 10, 0, 'add', 'admin', '2020-01-21 10:01:05'),
+(18, 'Gastronomía', '51', 11, 0, 'add', 'admin', '2020-01-21 10:01:36'),
+(19, 'Comunicación Social', '52', 11, 0, 'add', 'admin', '2020-01-21 10:01:00'),
+(20, 'Educación Continua', '60', 12, 0, 'add', 'admin', '2020-01-21 10:01:09'),
+(21, 'Interfacultades', '70', 13, 0, 'add', 'admin', '2020-01-21 10:01:11'),
+(22, 'Proyección social', '80', 14, 0, 'add', 'admin', '2020-01-21 10:01:11');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `om_proyectos`
+--
+
+CREATE TABLE IF NOT EXISTS `om_proyectos` (
+  `id_proyecto` int(11) NOT NULL AUTO_INCREMENT,
+  `nombre_proyecto` text NOT NULL,
+  `codigo_institucional_proyecto` varchar(255) NOT NULL,
+  `acto_administrativo` varchar(255) NOT NULL,
+  `grupo_colciencias` int(11) NOT NULL,
+  `linea_investigacion_institucional` int(11) NOT NULL,
+  `docente_lider` int(11) NOT NULL,
+  `facultad` int(11) NOT NULL,
+  `linea_facultad` int(11) NOT NULL,
+  `programa_academico` int(11) NOT NULL,
+  `linea_programa` int(11) NOT NULL,
+  `presupuesto_asignado` double NOT NULL,
+  `propuesta_proyecto` text NOT NULL,
+  `producto_esperado` text NOT NULL,
+  `fecha_inicio` date NOT NULL,
+  `fecha_final` date NOT NULL,
+  `archivo_informe_final` varchar(255) NOT NULL,
+  `presupuesto_ejecutado` double NOT NULL,
+  `estado` int(11) NOT NULL DEFAULT '1',
+  `borrado` int(11) NOT NULL DEFAULT '0',
+  `log_accion` varchar(255) NOT NULL DEFAULT 'add',
+  `log_usuario` varchar(255) DEFAULT 'No',
+  `log_timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id_proyecto`),
+  UNIQUE KEY `codigo_institucional_proyecto` (`codigo_institucional_proyecto`),
+  KEY `linea_investigacion_institucional` (`linea_investigacion_institucional`),
+  KEY `grupo_colciencias` (`grupo_colciencias`),
+  KEY `linea_facultad` (`linea_facultad`),
+  KEY `linea_programa` (`linea_programa`),
+  KEY `facultad` (`facultad`),
+  KEY `programa_academico` (`programa_academico`),
+  KEY `estado` (`estado`),
+  KEY `docente_lider` (`docente_lider`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=78 ;
+
+--
+-- Volcado de datos para la tabla `om_proyectos`
+--
+
+INSERT INTO `om_proyectos` (`id_proyecto`, `nombre_proyecto`, `codigo_institucional_proyecto`, `acto_administrativo`, `grupo_colciencias`, `linea_investigacion_institucional`, `docente_lider`, `facultad`, `linea_facultad`, `programa_academico`, `linea_programa`, `presupuesto_asignado`, `propuesta_proyecto`, `producto_esperado`, `fecha_inicio`, `fecha_final`, `archivo_informe_final`, `presupuesto_ejecutado`, `estado`, `borrado`, `log_accion`, `log_usuario`, `log_timestamp`) VALUES
+(1, 'SISTEMA WEB PARA LA GESTIÓN DE PROYECTOS DE INVESTIGACIÓN APLICADA Y FORMATIVA - UNIHORIZONTE.', 'FI210035', 'FI210035', 4, 1, 1, 4, 7, 1, 3, 9999, 'Se trata de un sistema web para gestionar los productos generados por concepto de investigación aplicada o investigación formativa de los docentes, investigadores, estudiantes, auxiliares de investigación, semilleristas, funcionarios administrativos o usuarios externos de la universidad UniHorizonte, procurando mantener los indicadores y ponderaciones de manera que sean compatibles con los criterios de medición estipulados por Colciencias.', 'SISTEMA WEB PARA LA GESTIÓN DE PROYECTOS DE INVESTIGACIÓN APLICADA Y FORMATIVA - UNIHORIZONTE.', '2019-11-29', '0000-00-00', '1_archivo_informe_final.png', 0, 3, 0, 'edit', 'admin', '2020-08-04 17:08:48'),
+(2, 'Encuentros de Proyectos Integrados de Aula (PIA) y proyectos de Aula (PA)- Fundación universitaria Horizonte', 'FI210001', 'FI210001', 4, 2, 4, 4, 7, 1, 1, 600000, 'Este es un proyecto que sirve para gestionar el evento que se realiza anualmente el presupuesto solicitado es para los gastos del evento y  mejorar la calidad del mismo', 'Memorias, organización del evento y participación de docentes y estudiantes( anual)', '2019-05-16', '0000-00-00', '', 0, 1, 0, 'edit', 'diana.tamayo', '2020-08-03 15:08:34'),
+(3, 'Promoviendo la escritura de artículos científicos desde los proyectos integrados de Aula (PIA)', 'FI210002', 'Resolución 065 10 abril 2019', 4, 2, 4, 4, 7, 1, 3, 1250000, 'Propuesta de prueba para el proyecto actual.', 'Artículo de investigación ', '2017-02-01', '0000-00-00', '', 0, 1, 0, 'edit', 'diana.tamayo', '2020-08-03 16:08:44'),
+(4, 'La teoría general de los sistemas en la gestión del riesgo', 'FI210003', 'Resolución 065 10 abril 2019', 4, 1, 5, 4, 7, 1, 3, 0, 'La teoría general de los sistemas en la gestión del riesgo', 'Ponencia en evento internacional - Nota cientifica\r\n', '2017-02-01', '0000-00-00', '', 0, 1, 0, 'edit', 'diana.tamayo', '2020-08-03 16:08:16'),
+(5, 'Practicidad y realidad social como instrumento de pedagogía en el desarrollo de proyectos empresariales', 'FI210004', 'Resolución 065 10 abril 2019', 4, 2, 6, 4, 7, 1, 3, 0, 'Practicidad y realidad social como instrumento de pedagogía en el desarrollo de proyectos empresariales', 'Artículo científico', '2018-02-01', '0000-00-00', '16_archivo_informe_final.xls', 0, 1, 0, 'edit', 'diana.tamayo', '2020-08-03 16:08:20'),
+(17, 'Efecto de los muros verdes sobre factores higiénicos', 'FI210005', 'Resolución 065 10 abril 2019', 4, 3, 4, 4, 7, 1, 3, 600000, 'Evaluación del efecto de muros verdes sobre factores higiénicos como temperatura y humedad', 'Ponencia en evento nacional', '2018-03-01', '0000-00-00', '', 0, 1, 0, 'edit', 'diana.tamayo', '2020-08-03 16:08:25'),
+(18, 'EL APRENDIZAJE BASADO EN PROYECTOS COMO TÉCNICA EN LA ENSEÑANZA DE LAS CIENCIAS QUÍMICAS EN INGENIERÍA', 'FI210006', 'Resolución 065 10 abril 2019', 4, 2, 7, 4, 7, 1, 1, 0, 'EL APRENDIZAJE BASADO EN PROYECTOS COMO TÉCNICA EN LA ENSEÑANZA DE LAS CIENCIAS QUÍMICAS EN INGENIERÍA', 'Artículo científico', '2018-01-01', '0000-00-00', '', 0, 4, 0, 'edit', 'diana.tamayo', '2020-08-03 10:08:27'),
+(19, 'LA ADMINISTRACIÓN DEL CAPITAL DE TRABAJO EN LAS PYMES: UN FACTOR CLAVE PARA SU DESARROLLO EN UN MUNDO GLOBALIZADO', 'FI210007', 'Resolución 065 10 abril 2019', 4, 1, 225, 4, 7, 1, 1, 0, 'LA ADMINISTRACIÓN DEL CAPITAL DE TRABAJO EN LAS PYMES: UN FACTOR CLAVE PARA SU DESARROLLO EN UN MUNDO GLOBALIZADO', 'Artículo científico', '2018-08-01', '0000-00-00', '', 0, 1, 0, 'edit', 'diana.tamayo', '2020-08-03 16:08:30'),
+(20, 'Diseño e implementación de instrumento para evaluar la fatiga en trabajadores de mantenimiento sector aeronautico', 'FI210008', 'Resolución 065 10 abril 2019', 4, 4, 5, 4, 7, 1, 1, 2000000, 'Semillero de investigación: Dirty dozen', 'Ponencia en evento Nacional', '2018-08-01', '0000-00-00', '20_archivo_informe_final.pdf', 0, 1, 0, 'edit', 'admin', '2020-08-04 17:08:16'),
+(21, 'Diseño e Integración del sistema de gestión de seguridad y salud en el trabajo al sistema de gestión de calidad', 'FI210009', 'Resolución 065 10 abril 2019', 4, 4, 222, 4, 7, 1, 1, 0, 'Diseño e Integración del sistema de gestión de seguridad y salud en el trabajo al sistema de gestión de calidad', 'Evidencia documental en Dirección Administrativa\r\nProyecto finalizado\r\n', '2018-09-01', '2018-12-01', '', 0, 3, 0, 'edit', 'diana.tamayo', '2020-08-03 16:08:47'),
+(22, 'La Lúdica en la enseñanza del autocuidado en el trabajo', 'FI210010', 'Resolución 065 10 abril 2019', 4, 2, 5, 4, 7, 1, 1, 0, 'La Lúdica en la enseñanza del autocuidado en el trabajo', 'Trabajo de grado\r\nPonencia en evento nacional\r\nArtículo científico', '2018-11-01', '2019-10-26', '22_archivo_informe_final.docx', 0, 3, 0, 'edit', 'diana.tamayo', '2020-08-03 16:08:53'),
+(23, 'Evolución de las tasas de interés bancario en los últimos cinco años y su impacto en el desarrollo de nuevos proyectos por parte de las empresas del sector  de la construcción en Colombia ', 'FI210011', 'Resolución 065 10 abril 2019', 4, 1, 225, 4, 7, 1, 1, 0, 'Evolución de las tasas de interés bancario en los últimos cinco años y su impacto en el desarrollo de nuevos proyectos por parte de las empresas del sector  de la construcción en Colombia', 'Artículo científico', '2018-04-01', '0000-00-00', '', 0, 1, 0, 'edit', 'diana.tamayo', '2020-08-03 16:08:40'),
+(24, 'Gamificación  como estrategia para  la prevención del riesgo', 'FI210012', 'Resolución 065 10 abril 2019', 4, 2, 10, 4, 7, 1, 1, 0, 'Gamificación  como estrategia para  la prevención del riesgo', 'Ponencia\r\nArtículo científico', '2019-02-01', '0000-00-00', '', 0, 4, 0, 'edit', 'diana.tamayo', '2020-08-03 10:08:59'),
+(25, 'CRISPIN sistema de alertas tempranas para primera infancia', 'FI210013', 'Resolución 065 10 abril 2019', 4, 4, 4, 4, 7, 1, 1, 1000000, 'CRISPIN sistema de alertas tempranas para primera infancia\r\nEl presupuesto se solicita para construir  el segundo protipo del dispositivo de alertas tempranas', 'trabajo de grado', '2019-02-01', '0000-00-00', '', 0, 4, 0, 'edit', 'diana.tamayo', '2020-08-03 10:08:39'),
+(26, 'Implementación de la ruta interna para la disposición de residuos químicos generados en el desarrollo curricular de las prácticas de laboratorio en la fundación universitaria horizonte según el SGA', 'FI220014', 'Resolución 065 10 abril 2019', 4, 3, 238, 4, 7, 2, 4, 0, 'Implementación de la ruta interna para la disposición de residuos químicos generados en el desarrollo curricular de las prácticas de laboratorio en la fundación universitaria horizonte según el SGA', 'Ponencia en evento nacional', '2017-08-01', '2020-05-10', '', 0, 3, 0, 'edit', 'diana.tamayo', '2020-08-03 07:08:14'),
+(27, 'Reulitización de Pasivos Ambientales de la Industria Oil & Gas.', 'FI220015', 'Resolución 065 10 abril 2019', 4, 3, 216, 4, 7, 2, 4, 0, 'Reulitización de Pasivos Ambientales de la Industria Oil & Gas.', 'Proyecto finalizado', '2017-10-01', '2018-12-12', '', 0, 3, 0, 'edit', 'diana.tamayo', '2020-08-03 07:08:49'),
+(28, 'Fitorremediación de metales de aguas industriales por medio de Elodea y Lenteja de agua.', 'FI220016', 'Resolución 065 10 abril 2019', 4, 3, 221, 4, 7, 2, 4, 600000, 'Fitorremediación de metales de aguas industriales por medio de Elodea y Lenteja de agua.\r\nEvaluaciones fisico-químicas externas', 'Ponencia en evento Nacional\r\nArtículo de investigación', '2018-01-01', '0000-00-00', '', 0, 1, 0, 'edit', 'diana.tamayo', '2020-08-03 07:08:17'),
+(29, 'PLAN DE EVACUACIÓN FACILIDAD DE PRODUCCION PETROLERA', 'FI220017', 'Resolución 065 10 abril 2019', 4, 4, 1, 4, 7, 2, 4, 0, 'PLAN DE EVACUACIÓN FACILIDAD DE PRODUCCION PETROLERA', 'Proyecto finalizado', '2018-02-01', '2018-05-01', '', 0, 3, 0, 'edit', 'diana.tamayo', '2020-08-03 07:08:52'),
+(30, 'Programa de Aseguramiento de tareas criticas (electrico alturas), control de riesgo locativo y gestión de emergencias en las actividades de bodegaje y almacentamiento en almacenes de cadena', 'FI220018', 'Resolución 065 10 abril 2019', 4, 4, 228, 4, 7, 2, 4, 0, 'Programa de Aseguramiento de tareas criticas (electrico alturas), control de riesgo locativo y gestión de emergencias en las actividades de bodegaje y almacentamiento en almacenes de cadena', 'Artículo de investigación', '2018-02-01', '0000-00-00', '', 0, 1, 0, 'edit', 'diana.tamayo', '2020-08-03 07:08:43'),
+(31, 'Reutilización de productos para la generación de conciencia ambiental', 'FI220019', 'Resolución 065 10 abril 2019', 4, 3, 216, 4, 7, 2, 4, 0, 'Reutilización de productos para la generación de conciencia ambiental', 'Ponencia en evento nacional', '2018-02-01', '0000-00-00', '', 0, 1, 0, 'edit', 'diana.tamayo', '2020-08-03 07:08:36'),
+(32, 'Revisión: El tétano como enfermedad laboral', 'FI220020', 'Resolución 065 10 abril 2019', 4, 3, 238, 4, 7, 2, 4, 0, 'Revisión: El tétano como enfermedad laboral', 'Artículo de revisión', '2018-02-01', '0000-00-00', '', 0, 1, 0, 'edit', 'diana.tamayo', '2020-08-03 08:08:07'),
+(33, 'Los clubes de ciencia: un análisis discursivo sobre la negociación de significados científicos y tecnológicos en un centro interactivo', 'FI220021', 'Resolución 065 10 abril 2019', 4, 2, 221, 4, 7, 2, 4, 0, 'Los clubes de ciencia: un análisis discursivo sobre la negociación de significados científicos y tecnológicos en un centro interactivo', 'Proyecto finalizado', '2018-08-01', '2018-12-01', '', 0, 3, 0, 'edit', 'diana.tamayo', '2020-08-03 08:08:33'),
+(34, 'Implementación de Estrategia Lúdica con Recursos Didácticos de Aprendizaje Integral de la Legislación en Seguridad y Salud en el Trabajo', 'FI220022', 'Resolución 065 10 abril 2019', 4, 2, 233, 4, 7, 2, 6, 0, 'Implementación de Estrategia Lúdica con Recursos Didácticos de Aprendizaje Integral de la Legislación en Seguridad y Salud en el Trabajo', 'Artículo de revisión\r\nPonencia evento nacional', '2018-08-01', '0000-00-00', '', 0, 1, 0, 'edit', 'diana.tamayo', '2020-08-03 08:08:04'),
+(35, 'Punto Ecologico Unihorizonte', 'FI220023', 'FI220023', 4, 3, 238, 4, 7, 2, 4, 0, 'Punto Ecologico Unihorizonte', 'Punto ecologico de recolección de productos post-consumo', '2018-08-01', '0000-00-00', '', 0, 1, 0, 'add', 'admin', '2020-01-13 12:01:18'),
+(36, 'ANÁLISIS DE RIESGOS MECÁNICOS Y GESTIÓN DE EMERGENCIAS EN UN TALADRO DE PERFORACIÓN PETROLERA', 'FI220024', 'Resolución 065 10 abril 2019', 4, 3, 239, 4, 7, 2, 4, 0, 'ANÁLISIS DE RIESGOS MECÁNICOS Y GESTIÓN DE EMERGENCIAS EN UN TALADRO DE PERFORACIÓN PETROLERA', 'Proyecto finalizado', '2018-08-01', '2018-11-01', '', 0, 3, 0, 'edit', 'diana.tamayo', '2020-08-03 08:08:46'),
+(37, 'Riesgo Químico para profesionales en SST', 'FI220025', 'Resolución 065 10 abril 2019', 4, 2, 221, 4, 7, 2, 4, 0, 'Riesgo Químico para profesionales en SST', 'Manual de laboratorio - Fundación Universitaria Horizonte', '2019-02-01', '0000-00-00', '', 0, 2, 0, 'edit', 'diana.tamayo', '2020-08-03 08:08:47'),
+(38, 'Evaluación de la biodegradación del petróleo por parte de un cultivo de algas líquido.', 'FI220026', 'Resolución 065 10 abril 2019', 4, 3, 216, 4, 7, 2, 4, 600000, 'Evaluación de la biodegradación del petróleo por parte de un cultivo de algas líquido.\r\nPara pruebas e insumos de laboratorio, no es necesario un solo desembolso', 'Artículo de investigación\r\nPonencia evento nacional', '2019-03-01', '0000-00-00', '', 0, 2, 0, 'edit', 'diana.tamayo', '2020-08-03 08:08:43'),
+(39, 'PREVENCIÓN DE LOS RIESGOS LABORALES DESDE LA NEUROCIENCIA.', 'FI220027', 'Resolución 065 10 abril 2019', 4, 4, 235, 4, 7, 2, 4, 0, 'PREVENCIÓN DE LOS RIESGOS LABORALES DESDE LA NEUROCIENCIA.', 'Artículo de investigación\r\nPonencia evento nacional', '2019-03-01', '0000-00-00', '', 0, 2, 0, 'edit', 'diana.tamayo', '2020-08-03 08:08:34'),
+(40, 'SACRIFICIO DE BOVINOS Y SU IMPACTO CON EL MEDIO AMBIENTE', 'FI220028', 'Resolución 065 10 abril 2019', 4, 3, 229, 4, 7, 2, 4, 0, 'SACRIFICIO DE BOVINOS Y SU IMPACTO CON EL MEDIO AMBIENTE', 'Trabajos de grado\r\nArtículo de investigación', '2019-03-01', '0000-00-00', '', 0, 4, 0, 'edit', 'diana.tamayo', '2020-08-03 10:08:13'),
+(41, 'Comparación del efecto de dos biofertilizantes sobre la germinación y el crecimiento inicial de arveja (pisum sativum)y frijol (phaseoulus vulgaris)', 'FI230029', 'Resolución 065 10 de abril de 2019', 4, 3, 231, 4, 7, 3, 7, 0, 'Comparación del efecto de dos biofertilizantes sobre la germinación y el crecimiento inicial de arveja (pisum sativum)y frijol (phaseoulus vulgaris)', 'Proyecto Finalizado', '2016-12-01', '2017-07-01', '41_archivo_informe_final.pdf', 0, 3, 0, 'edit', 'luisa.garcia', '2020-08-03 10:08:03'),
+(42, 'Muros verdes como estrategia para la mitigación de la huella de carbono generada por la fundación universitaria horizonte', 'FI230030', 'Resolución 065 10 de abril de 2019', 4, 3, 231, 4, 7, 3, 7, 2800000, 'Muros verdes como estrategia para la mitigación de la huella de carbono generada por la fundación universitaria horizonte\r\nLos recursos se obtuvieron a partir de la convocatorica de FODESEP 2017', 'Proyecto finalizado', '2017-02-01', '2017-12-01', '', 0, 3, 0, 'edit', 'luisa.garcia', '2020-08-03 17:08:35'),
+(43, 'Comparación del efecto de diferentes dosis de micorrizas sobre la germinación y el crecimiento inicial de arveja (pisum sativum)y frijol (phaseoulus vulgaris)', 'FI230031', 'Resolución 065 10 de abril de 2019', 4, 3, 231, 4, 7, 3, 7, 0, 'Comparación del efecto de diferentes dosis de micorrizas sobre la germinación y el crecimiento inicial de arveja (pisum sativum)y frijol (phaseoulus vulgaris)', 'Artículo de investigación', '2017-07-01', '0000-00-00', '', 0, 1, 0, 'edit', 'luisa.garcia', '2020-08-03 17:08:11'),
+(44, 'Montaje de sistema para prueba de jarras en el laboratorio de UniHorizonte', 'FI230032', 'FI230032', 4, 3, 232, 4, 7, 3, 7, 2000000, 'Montaje de sistema para prueba de jarras en el laboratorio de UniHorizonte.\r\nEl presupuesto es solicitado para la compra de los materiales que se requieren para la construcción del equipo que quedará como parte del laboratorio. Este valor puede ser asignado en dos cuotas', 'Prototipo de equipo', '2018-10-01', '0000-00-00', '', 2000000, 4, 0, 'edit', 'luisa.garcia', '2020-08-03 15:08:43'),
+(45, 'Determinación de la huella de carbono de la Fundación Universitaria Horizonte', 'FB400033', 'Resolución 065 10 de abril de 2019', 5, 3, 231, 1, 2, 7, 12, 60000, 'Determinación de la huella de carbono de la Fundación Universitaria Horizonte', 'Proyecto Finalizado', '2016-02-01', '2018-06-01', '45_archivo_informe_final.pdf', 0, 3, 0, 'edit', 'luisa.garcia', '2020-08-03 15:08:20'),
+(46, 'ENCUENTROS DE CIENCIAS BÁSICAS-FUNDACIÓN UNIVERSITARIA HORIZONTE', 'FB400034', 'Resolución 065 10 de abril de 2019', 5, 2, 220, 1, 1, 6, 11, 1250000, 'ENCUENTROS DE CIENCIAS BÁSICAS-FUNDACIÓN UNIVERSITARIA HORIZONTE', '- Memorias, organización del evento y participación de docentes y estudiantes( anual)\r\n- Este es un proyecto que sirve para gestionar el evento que se realiza anualmente el presupuesto solicitado es para los gastos del evento y  mejorar la calidad del mismo\r\n', '2016-10-01', '0000-00-00', '', 0, 1, 0, 'edit', 'luisa.garcia', '2020-08-03 17:08:45'),
+(47, 'Uso de TICs en calculo diferencial aplicación en ingeniería seguridad y salud en el trabajo', 'FB400035', 'Resolución 065 10 de abril de 2019', 5, 2, 230, 1, 2, 7, 12, 100000, 'Uso de TICs en calculo diferencial aplicación en ingeniería seguridad y salud en el trabajo', '- Proyecto Finalizado\r\n- Los recursos se otorgaron para la movilidad estudiantil\r\n', '2017-02-01', '2017-11-01', '', 0, 3, 0, 'edit', 'luisa.garcia', '2020-08-03 17:08:44'),
+(48, 'Uso de TICs en calculo diferencial optimización en riesgos profesionales para ingeniería', 'FB400036', 'Resolución 065 10 de abril de 2019', 5, 2, 230, 1, 2, 7, 12, 99997, 'Uso de TICs en calculo diferencial optimización en riesgos profesionales para ingeniería', '- Los recursos se otorgaron para la movilidad estudiantil	\r\n- Proyecto Finalizado\r\n', '2017-02-01', '2017-11-01', '', 0, 3, 0, 'edit', 'luisa.garcia', '2020-08-03 17:08:23'),
+(49, 'Concepción histórica  del cambio conceptual  desde la aparición de la ciencia moderna y su aplicación pedagógica para el desarrollo del pensamiento científico', 'FB400037', 'Resolución 065 10 de abril de 2019', 5, 2, 215, 1, 1, 6, 11, 500000, 'Concepción histórica  del cambio conceptual  desde la aparición de la ciencia moderna y su aplicación pedagógica para el desarrollo del pensamiento científico', '- Artículo de investigación', '2017-02-01', '2019-12-03', '49_archivo_informe_final.pdf', 0, 3, 0, 'edit', 'luisa.garcia', '2020-08-03 17:08:55'),
+(50, 'Estilos de aprendizaje para la enseñanza de las matemáticas', 'FB400038', 'Resolución 065 10 de abril de 2019', 5, 2, 219, 1, 1, 6, 11, 0, 'Estilos de aprendizaje para la enseñanza de las matemáticas', 'Proyecto Finalizado', '2017-02-01', '2018-06-01', '50_archivo_informe_final.pdf', 0, 3, 0, 'edit', 'luisa.garcia', '2020-08-03 15:08:59'),
+(51, 'El modelo de red neuronal artificial (RNA) como estrategia interdisciplinaria para el acercamiento a la comprensión de circuitos eléctricos', 'FB400039', 'Resolución 065 10 de abril de 2019', 5, 2, 217, 1, 2, 7, 12, 0, 'El modelo de red neuronal artificial (RNA) como estrategia interdisciplinaria para el acercamiento a la comprensión de circuitos eléctricos', 'Proyecto Finalizado', '2017-10-04', '2017-10-01', '51_archivo_informe_final.pdf', 0, 3, 0, 'edit', 'luisa.garcia', '2020-08-03 15:08:16'),
+(52, 'la empresa de bioinsumos como un ejemplo de producción y consumo sostenible', 'FB400040', 'Resolución 065 10 de abril de 2019', 1, 3, 231, 1, 2, 7, 12, 0, 'la empresa de bioinsumos como un ejemplo de producción y consumo sostenible', 'Proyecto Finalizado', '2017-05-01', '2017-11-01', '', 0, 3, 0, 'edit', 'luisa.garcia', '2020-08-03 17:08:26'),
+(53, 'Efectos en la salud de trabajadores en construcción expuestos a diferentes formas de radiación', 'FB400041', 'Resolución 065 10 de abril de 2019', 5, 3, 220, 1, 2, 7, 12, 1200000, 'Efectos en la salud de trabajadores en construcción expuestos a diferentes formas de radiación', '- Costos de inscripción y participación  en el congreso: \r\nInNGENIO 2019 - fundacioniai.org 21-23 Agosto- Medellín\r\n- Artículo de investigación\r\n- Ponencia en evento nacional\r\n', '2017-10-01', '0000-00-00', '', 0, 4, 0, 'edit', 'luisa.garcia', '2020-08-03 15:08:43'),
+(54, 'Importancia del módulo de razonamiento cuantitativo en la prueba saber PRO-ICFES en la formación de estudiantes de las facultades de ingeniería en Colombia', 'FB400042', 'Resolución 065 10 de abril de 2019', 5, 2, 237, 1, 2, 7, 12, 0, 'Importancia del módulo de razonamiento cuantitativo en la prueba saber PRO-ICFES en la formación de estudiantes de las facultades de ingeniería en Colombia', 'Artículo de investigación', '2018-02-01', '0000-00-00', '', 0, 4, 0, 'edit', 'luisa.garcia', '2020-08-03 15:08:41'),
+(57, 'Evaluación del riesgo laboral en el cultivo de papa en la zona rural de Usme, vereda las margaritas', 'FB400043', 'Resolución 065 10 de abril de 2019', 4, 3, 231, 1, 2, 7, 12, 350000, 'Evaluación del riesgo laboral en el cultivo de papa en la zona rural de Usme, vereda las margaritas', 'Análisis Fisico-químico- Externo\r\n- Trabajo de grado T.P SHI\r\n- Participación en evento nacional\r\n', '2018-08-01', '0000-00-00', '', 0, 1, 0, 'edit', 'luisa.garcia', '2020-08-03 17:08:41'),
+(58, 'Estructura terciaria y Docking de PGRPLA1', 'FB400044', 'Resolución 065 10 de abril de 2019', 5, 2, 223, 1, 2, 7, 12, 0, 'Estructura terciaria y DockinEstructura terciaria y Docking de PGRPLA1g de PGRPLA1', '- Costos de inscripción y participación  en el congreso: \r\nInNGENIO 2019 - fundacioniai.org 21-23 Agosto- Medellín\r\n- Artículo de investigación\r\n', '2018-08-01', '0000-00-00', '', 0, 1, 0, 'edit', 'luisa.garcia', '2020-08-03 17:08:49'),
+(59, 'Estudio del impacto económico y factibilidad técnica del montaje de sistemas de generación de energía solar para los laboratorios de computación en UniHorizonte', 'FB400045', 'Resolución 065 10 de abril de 2019', 5, 1, 234, 1, 2, 7, 12, 0, 'Estudio del impacto económico y factibilidad técnica del montaje de sistemas de generación de energía solar para los laboratorios de computación en UniHorizonte', 'Nota cientifica', '2018-09-01', '0000-00-00', '', 0, 4, 0, 'edit', 'luisa.garcia', '2020-08-03 15:08:05'),
+(60, 'Análisis del material particulado PM-10 en la localidad de Chapinero', 'FB400046', 'Resolución 065 10 de abril de 2019', 5, 3, 227, 1, 2, 7, 12, 1200000, 'Análisis del material particulado PM-10 en la localidad de Chapinero', 'NOTA: Este proyecto no tiene fecha de inicio en la base de datos de Excel.\r\n\r\n- Costos de inscripción y participación  en el congreso: \r\nInNGENIO 2019 - fundacioniai.org 21-23 Agosto- Medellín\r\n- Artículo de investigación\r\n', '2018-09-01', '0000-00-00', '', 0, 1, 0, 'edit', 'luisa.garcia', '2020-08-03 17:08:20'),
+(61, 'Educación Económica Y Financiera para la solución de conflictos en Propiedad Horizontal', 'FA350047', 'FA350047', 2, 1, 236, 2, 10, 15, 27, 150000, 'Educación Económica Y Financiera para la solución de conflictos en Propiedad Horizontal', 'Ponencia- IV Encuentro Nacional y III Internacional de Investigación de Ciencias Económicas, Administrativas y Contables. Ibagué - Tolima', '2019-07-01', '2019-11-01', '', 0, 3, 0, 'add', 'admin', '2020-01-22 13:01:54'),
+(62, 'Didáctica de la Información Financiera', 'FA350048', 'FA350048', 2, 1, 236, 2, 10, 15, 27, 30000, 'Didáctica de la Información Financiera', 'Congreso Internacional de Investigación SENA\r\nArtículo de investigación\r\n', '2019-10-01', '2019-10-31', '', 0, 3, 0, 'add', 'admin', '2020-01-22 13:01:43'),
+(63, 'Educación Económica Y Financiera un aporte a la exclusión social', 'FA350049', 'FA350049', 3, 1, 224, 2, 10, 15, 27, 80000, 'Educación Económica Y Financiera un aporte a la exclusión social', 'Ponencia VIII Coloquio binacional de Investigación en Educación', '2019-10-01', '2017-10-31', '', 0, 3, 0, 'add', 'admin', '2020-01-22 13:01:17'),
+(64, 'El papel del Contador y Revisor Fiscal en propiedad Horizontal', 'FA370050', 'FA370050', 3, 1, 236, 2, 10, 17, 29, 2000000, 'El papel del Contador y Revisor Fiscal en propiedad Horizontal', '- Ponencia VII Cumbre nacional de Contadores Públicos ( Instituto Nacional de Contadores Públicos) -  Cartagena - Colombia\r\n- Artículo de investigación\r\n', '2019-08-28', '2019-08-30', '', 0, 3, 0, 'add', 'admin', '2020-01-22 13:01:55'),
+(65, 'Retos del contador Público en la era de la automatización', 'FA370051', 'FA370051', 3, 1, 236, 2, 10, 17, 29, 300000, 'Retos del contador Público en la era de la automatización', '- Congreso Internacional de Investigación\r\n- Artículo de investigación\r\n', '2019-07-01', '2019-07-31', '', 0, 3, 0, 'add', 'admin', '2020-01-22 13:01:19'),
+(66, 'Huertas-recetario:Una caja de sabores y saberes ancestrales, como modelo de negocio rural sostenible', 'IF700052', 'IF700052', 4, 3, 218, 6, 13, 21, 31, 0, 'Huertas-recetario:Una caja de sabores y saberes ancestrales, como modelo de negocio rural sostenible', '- Propuesta envíada a la convocatoria FODESEP 2018\r\n- Artículo investigación\r\n- Documento de capacitación/Manual\r\n- Participación en evento cientifico \r\n- 1 Trabajo de grado\r\n\r\n\r\nNOTA: Se le colocó fecha del 2019-01-01 por FODESEP 2018 en BD Excel no tiene', '2018-01-01', '0000-00-00', '', 0, 2, 0, 'edit', 'luisa.garcia', '2020-08-03 08:08:22'),
+(67, 'Implementación de huertas ecológicas en hogares de la localidad de Barrios Unidos como estrategia para la integración Escuela-Universidad- Familia bajo el esquema de producción y consumo sostenible', 'IF700053', 'IF700053', 4, 3, 218, 6, 13, 21, 31, 0, 'Implementación de huertas ecológicas en hogares de la localidad de Barrios Unidos como estrategia para la integración Escuela-Universidad- Familia bajo el esquema de producción y consumo sostenible', '- Propuesta envíada a la convocatoria FODESEP 2018\r\n- Artículo investigación\r\n- Documento de capacitación/Manual\r\n- Participación en evento cientifico \r\n- 1 Trabajo de grado\r\n\r\nNOTA: Se le coloca fecha 2018-01-01 por FODESEP 2018', '2018-01-01', '0000-00-00', '', 0, 2, 0, 'add', 'admin', '2020-01-22 13:01:59'),
+(68, 'PROYECTOS INTEGRADOS DE AULA COMO HERRAMIENTA PARA PROMOVER LA INVESTIGACIÓN EN LA EDUCACIÓN SUPERIOR', 'IF700054', 'Resolución 065 10 de abril de 2019', 4, 2, 231, 6, 13, 21, 31, 1000000, 'PROYECTOS INTEGRADOS DE AULA COMO HERRAMIENTA PARA PROMOVER LA INVESTIGACIÓN EN LA EDUCACIÓN SUPERIOR', 'Artículo en revista indexada\r\n\r\nNOTA: No tiene fecha de inicio ni de fin se coloca 2019-01-01 como fecha de inicio', '2019-01-01', '0000-00-00', '', 0, 1, 0, 'edit', 'luisa.garcia', '2020-08-03 17:08:59'),
+(69, 'ESTUDIO DE DISPOSITIVOS ERGONÓMICOS DE ESPALDA BAJA APLICADO A  CONDUCTORES DE CARRO LIVIANO', 'FI210065', 'nnnn', 4, 4, 242, 4, 7, 1, 3, 0, 'Evaluar 3 dispositivos de espalda baja para conductores', 'Trabajo de grado', '2019-02-02', '2020-04-06', '', 0, 3, 0, 'edit', 'diana.tamayo', '2020-08-03 09:08:44'),
+(70, 'Alternativas microbiológicas para la remediación de suelos y aguas contaminados con fertilizantes nitrogenados', 'FB400070', 'NN', 5, 3, 231, 1, 2, 7, 12, 0, 'Alternativas microbiológicas para la remediación de suelos y aguas contaminados con fertilizantes nitrogenados', 'Artículo de investigación\r\nPonencia Nacional \r\nPoster Nacional', '2019-04-01', '2020-06-30', '70_archivo_informe_final.docx', 0, 3, 0, 'add', 'luisa.garcia', '2020-08-03 08:08:58'),
+(71, 'Aplicación teórico-práctica de la ecuación de nivel de presión sonora como una función de distancia desde una fuente de emisión.', 'FI210072', 'nnnn', 4, 1, 4, 4, 7, 1, 1, 0, 'Aplicación teórico-práctica de la ecuación de nivel de presión sonora como una función de distancia desde una fuente de emisión.', 'Trabajo de grado estudiante ingeniería\r\nPonencia evento cientifico', '2019-02-14', '2020-10-20', '', 0, 3, 0, 'edit', 'diana.tamayo', '2020-08-03 09:08:56'),
+(72, 'CONTAMINANTES EMERGENTES: INVISIBLES PERO DE ALTA CRITICIDAD', 'FI210073', 'nnnn', 4, 3, 238, 4, 7, 1, 1, 0, 'Evaluación de la percepción de contaminantes emergentes en los estudiantes de unihorizonte', 'Ponencia en evento científico y artículo científico ', '2020-02-10', '0000-00-00', '', 0, 1, 0, 'add', 'diana.tamayo', '2020-08-03 09:08:42'),
+(73, 'TRANSPORTE, CARGUE Y VENTA MANUAL FRUTAS EN EL SECTOR INFORMAL, SAN ANDRÉS ISLAS, COLOMBIA', 'FI210074', 'nnnn', 4, 4, 4, 4, 7, 1, 3, 0, 'TRANSPORTE, CARGUE Y VENTA MANUAL FRUTAS EN EL SECTOR INFORMAL, SAN ANDRÉS ISLAS, COLOMBIA', 'Trabajo de grado', '2020-05-20', '0000-00-00', '', 0, 2, 0, 'add', 'diana.tamayo', '2020-08-03 10:08:27'),
+(74, 'ACCESIBILIDAD DE LOS ORGANISMOS DE SOCORRO EN BOGOTÁ D.C', 'FI210075', 'nnnn', 4, 4, 4, 4, 7, 1, 1, 0, 'EVALUAR LA ACCESIBILIDAD DE LOS ORGANISMOS DE SOCORRO EN BOGOTÁ D.C DURANTE EMERGENCIAS ', 'Trabajo de grado', '2020-02-08', '0000-00-00', '', 0, 2, 0, 'edit', 'diana.tamayo', '2020-08-03 10:08:37'),
+(75, ' Calidad de aire de interior en viviendas y salud enmujeres de Agua Caliente, Poncitlán, Jalisco (2018) ', 'FI220076', 'nnnn', 4, 3, 243, 4, 7, 2, 5, 0, 'Evaluación  Calidad de aire de interior en viviendas y salud enmujeres de Agua Caliente, Poncitlán, Jalisco (2018) ', 'Capítulo de libro', '2020-02-08', '2020-05-26', '', 0, 3, 0, 'edit', 'diana.tamayo', '2020-08-03 10:08:26'),
+(76, 'Procedimientos para identificar riesgos', 'FI220077', 'nnnn', 4, 4, 243, 4, 7, 2, 4, 0, 'Desarrollo de guía didáctica para la identificación de riesgos  ', 'Guía didáctica ', '2020-02-08', '2020-05-26', '', 0, 3, 0, 'add', 'diana.tamayo', '2020-08-03 10:08:14'),
+(77, 'Exposición laboral a los Riesgos químicos asociados a germinación siembra, producción y\r\nzoqueo del café departamento Cundinamarca municipio de San Juan de la Vega Vereda\r\nChuscal Finca Peña Blanca', 'FI220078', 'nnnn', 4, 4, 4, 4, 7, 2, 4, 0, 'Evaluación de la exposición laboral a los Riesgos químicos asociados a germinación siembra, producción y\r\nzoqueo del café departamento Cundinamarca municipio de San Juan de la Vega Vereda\r\nChuscal Finca Peña Blanca', 'Trabajo de grado', '2020-02-08', '0000-00-00', '', 0, 2, 0, 'add', 'diana.tamayo', '2020-08-03 10:08:46');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `om_roles_lista`
+--
+
+CREATE TABLE IF NOT EXISTS `om_roles_lista` (
+  `id_rol_lista` int(11) NOT NULL AUTO_INCREMENT,
+  `nombre_rol` varchar(255) NOT NULL,
+  `borrado` int(11) NOT NULL DEFAULT '0',
+  `log_accion` varchar(255) NOT NULL DEFAULT 'add',
+  `log_usuario` varchar(255) DEFAULT 'No',
+  `log_timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id_rol_lista`),
+  UNIQUE KEY `nombre_rol` (`nombre_rol`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=8 ;
+
+--
+-- Volcado de datos para la tabla `om_roles_lista`
+--
+
+INSERT INTO `om_roles_lista` (`id_rol_lista`, `nombre_rol`, `borrado`, `log_accion`, `log_usuario`, `log_timestamp`) VALUES
+(1, 'Administrativo', 0, 'add', 'No', '2019-06-04 15:05:35'),
+(2, 'Auxiliar de investigación', 0, 'add', 'No', '2019-06-04 15:05:35'),
+(3, 'Docente', 0, 'add', 'No', '2019-06-04 15:05:35'),
+(4, 'Estudiante', 0, 'add', 'No', '2019-06-04 15:05:35'),
+(5, 'Externo', 0, 'add', 'No', '2019-06-04 15:05:35'),
+(6, 'Investigador', 0, 'add', 'No', '2019-06-04 15:05:35'),
+(7, 'Semillerista', 0, 'add', 'No', '2019-06-04 15:05:35');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `om_system`
+--
+
+CREATE TABLE IF NOT EXISTS `om_system` (
+  `system_id` int(11) NOT NULL AUTO_INCREMENT,
+  `system_name` varchar(255) NOT NULL,
+  `system_abbreviation` varchar(255) NOT NULL,
+  `system_folder` varchar(11) NOT NULL,
+  `system_sequence` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `system_email` varchar(255) NOT NULL,
+  `borrado` int(11) NOT NULL DEFAULT '0',
+  `log_accion` varchar(255) NOT NULL DEFAULT 'add',
+  `log_usuario` varchar(255) DEFAULT 'No',
+  `log_timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`system_id`),
+  KEY `user_id` (`user_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+
+--
+-- Volcado de datos para la tabla `om_system`
+--
+
+INSERT INTO `om_system` (`system_id`, `system_name`, `system_abbreviation`, `system_folder`, `system_sequence`, `user_id`, `system_email`, `borrado`, `log_accion`, `log_usuario`, `log_timestamp`) VALUES
+(1, 'Proyectos UH', 'P-UH', 'uh', 79, 1, 'direccion.tic@unihorizonte.edu.co', 0, 'add', 'No', '2019-02-28 17:08:46');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `om_users`
+--
+
+CREATE TABLE IF NOT EXISTS `om_users` (
+  `user_id` int(11) NOT NULL AUTO_INCREMENT,
+  `indice` int(11) NOT NULL DEFAULT '0',
+  `user_name` varchar(150) DEFAULT NULL,
+  `user_email` varchar(255) DEFAULT NULL,
+  `user_password` varchar(255) NOT NULL DEFAULT '90bec6a873797ae97355a367dab57d371b7cd7e9',
+  `user_username` varchar(255) NOT NULL,
+  `rol` int(11) NOT NULL,
+  `user_type_id` int(45) NOT NULL,
+  `user_timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `system_id` int(11) NOT NULL DEFAULT '1',
+  `borrado` int(11) NOT NULL DEFAULT '0',
+  `log_accion` varchar(255) NOT NULL DEFAULT 'add',
+  `log_usuario` varchar(255) NOT NULL DEFAULT 'No',
+  `log_timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`user_id`),
+  UNIQUE KEY `username` (`user_username`),
+  UNIQUE KEY `user_email` (`user_email`),
+  KEY `tipo` (`user_type_id`),
+  KEY `user_system` (`system_id`),
+  KEY `rol` (`rol`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=244 ;
+
+--
+-- Volcado de datos para la tabla `om_users`
+--
+
+INSERT INTO `om_users` 
+(`user_id`, `indice`, `user_name`, `user_email`, `user_password`, `user_username`, `rol`, `user_type_id`, `user_timestamp`, `system_id`, `borrado`, `log_accion`, `log_usuario`, `log_timestamp`) 
+VALUES
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `om_user_group`
+--
+
+CREATE TABLE IF NOT EXISTS `om_user_group` (
+  `user_group_id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_group_name` varchar(255) NOT NULL,
+  `borrado` int(11) NOT NULL DEFAULT '0',
+  `log_accion` varchar(255) NOT NULL DEFAULT 'add',
+  `log_usuario` varchar(255) DEFAULT 'No',
+  `log_timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`user_group_id`),
+  UNIQUE KEY `user_group_name` (`user_group_name`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=9 ;
+
+--
+-- Volcado de datos para la tabla `om_user_group`
+--
+
+INSERT INTO `om_user_group` (`user_group_id`, `user_group_name`, `borrado`, `log_accion`, `log_usuario`, `log_timestamp`) VALUES
+(1, 'Administrators', 0, 'add', 'No', '2019-02-28 17:09:36'),
+(2, 'Research Assistant', 0, 'add', 'No', '2019-02-28 17:09:36'),
+(3, 'Teacher', 0, 'add', 'No', '2019-02-28 17:09:36'),
+(4, 'Student', 0, 'add', 'No', '2019-02-28 17:09:36'),
+(5, 'External', 0, 'add', 'No', '2019-02-28 17:09:36'),
+(6, 'Researcher', 0, 'add', 'No', '2019-02-28 17:09:36'),
+(7, 'Semillerista', 0, 'add', 'No', '2019-02-28 17:09:36'),
+(8, 'Inactive', 0, 'add', 'No', '2019-02-28 17:09:36');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `om_user_type`
+--
+
+CREATE TABLE IF NOT EXISTS `om_user_type` (
+  `user_type_id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_type_name` varchar(255) NOT NULL,
+  `user_group_id` int(11) NOT NULL,
+  `borrado` int(11) NOT NULL DEFAULT '0',
+  `log_accion` varchar(255) NOT NULL DEFAULT 'add',
+  `log_usuario` varchar(255) DEFAULT 'No',
+  `log_timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`user_type_id`),
+  UNIQUE KEY `user_type_name` (`user_type_name`),
+  KEY `user_group_id` (`user_group_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
+
+--
+-- Volcado de datos para la tabla `om_user_type`
+--
+
+INSERT INTO `om_user_type` (`user_type_id`, `user_type_name`, `user_group_id`, `borrado`, `log_accion`, `log_usuario`, `log_timestamp`) VALUES
+(1, 'administrador', 1, 0, 'add', 'No', '2019-02-28 17:09:58'),
+(2, 'usuario', 4, 0, 'add', 'No', '2019-02-28 17:09:58'),
+(3, 'invitado', 3, 0, 'add', 'No', '2019-02-28 17:09:58'),
+(4, 'inactivo', 2, 0, 'add', 'No', '2019-02-28 17:09:58');
+
+--
+-- Restricciones para tablas volcadas
+--
+
+--
+-- Filtros para la tabla `om_avances`
+--
+ALTER TABLE `om_avances`
+  ADD CONSTRAINT `om_avances_ibfk_1` FOREIGN KEY (`proyecto`) REFERENCES `om_proyectos` (`id_proyecto`) ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `om_docentes_grupos_unihorizonte`
+--
+ALTER TABLE `om_docentes_grupos_unihorizonte`
+  ADD CONSTRAINT `om_docentes_grupos_unihorizonte_ibfk_1` FOREIGN KEY (`proyecto`) REFERENCES `om_proyectos` (`id_proyecto`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `om_docentes_grupos_unihorizonte_ibfk_2` FOREIGN KEY (`docente`) REFERENCES `om_users` (`user_id`);
+
+--
+-- Filtros para la tabla `om_grupos_unihorizonte`
+--
+ALTER TABLE `om_grupos_unihorizonte`
+  ADD CONSTRAINT `om_estudiantes_ibfk_1` FOREIGN KEY (`proyecto`) REFERENCES `om_proyectos` (`id_proyecto`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `om_estudiantes_ibfk_2` FOREIGN KEY (`estudiante`) REFERENCES `om_estudiantes` (`id_estudiante`) ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `om_lineas_facultad_lista`
+--
+ALTER TABLE `om_lineas_facultad_lista`
+  ADD CONSTRAINT `om_lineas_facultad_lista_ibfk_1` FOREIGN KEY (`facultad`) REFERENCES `om_facultades_lista` (`facultad_lista_id`) ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `om_lineas_por_programa`
+--
+ALTER TABLE `om_lineas_por_programa`
+  ADD CONSTRAINT `om_lineas_por_programa_ibfk_1` FOREIGN KEY (`programa_academico`) REFERENCES `om_programa_academico_lista` (`id_programa_academico`) ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `om_locks`
+--
+ALTER TABLE `om_locks`
+  ADD CONSTRAINT `om_locks_ibfk_1` FOREIGN KEY (`id_usuario`) REFERENCES `om_users` (`user_id`);
+
+--
+-- Filtros para la tabla `om_productos`
+--
+ALTER TABLE `om_productos`
+  ADD CONSTRAINT `om_productos_ibfk_1` FOREIGN KEY (`proyecto`) REFERENCES `om_proyectos` (`id_proyecto`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `om_productos_ibfk_3` FOREIGN KEY (`producto_colciencias`) REFERENCES `om_productos_lista_colciencias` (`id_producto_lista_colciencias`) ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `om_programa_academico_lista`
+--
+ALTER TABLE `om_programa_academico_lista`
+  ADD CONSTRAINT `om_programa_academico_lista_ibfk_1` FOREIGN KEY (`linea_facultad`) REFERENCES `om_lineas_facultad_lista` (`id_linea_facultad_lista`) ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `om_proyectos`
+--
+ALTER TABLE `om_proyectos`
+  ADD CONSTRAINT `om_proyectos_ibfk_10` FOREIGN KEY (`docente_lider`) REFERENCES `om_users` (`user_id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `om_proyectos_ibfk_2` FOREIGN KEY (`linea_investigacion_institucional`) REFERENCES `om_lineas_institucionales_lista` (`id_linea_institucional_lista`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `om_proyectos_ibfk_3` FOREIGN KEY (`grupo_colciencias`) REFERENCES `om_grupos_colciencias_lista` (`id_grupo_colciencias`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `om_proyectos_ibfk_4` FOREIGN KEY (`linea_facultad`) REFERENCES `om_lineas_facultad_lista` (`id_linea_facultad_lista`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `om_proyectos_ibfk_6` FOREIGN KEY (`facultad`) REFERENCES `om_facultades_lista` (`facultad_lista_id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `om_proyectos_ibfk_7` FOREIGN KEY (`linea_programa`) REFERENCES `om_lineas_por_programa` (`id_lineas_por_programa`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `om_proyectos_ibfk_8` FOREIGN KEY (`programa_academico`) REFERENCES `om_programa_academico_lista` (`id_programa_academico`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `om_proyectos_ibfk_9` FOREIGN KEY (`estado`) REFERENCES `om_estado_proyecto` (`id_estado`) ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `om_system`
+--
+ALTER TABLE `om_system`
+  ADD CONSTRAINT `om_system_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `om_users` (`user_id`) ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `om_users`
+--
+ALTER TABLE `om_users`
+  ADD CONSTRAINT `om_users_ibfk_1` FOREIGN KEY (`user_type_id`) REFERENCES `om_user_type` (`user_type_id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `om_users_ibfk_2` FOREIGN KEY (`system_id`) REFERENCES `om_system` (`system_id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `om_users_ibfk_3` FOREIGN KEY (`rol`) REFERENCES `om_roles_lista` (`id_rol_lista`) ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `om_user_type`
+--
+ALTER TABLE `om_user_type`
+  ADD CONSTRAINT `om_user_type_ibfk_1` FOREIGN KEY (`user_group_id`) REFERENCES `om_user_group` (`user_group_id`) ON UPDATE CASCADE;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
