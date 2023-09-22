@@ -122,9 +122,7 @@ class Common_model_projects extends Model_common {
             $sql = "UPDATE om_" . $subsys . "_project_detail SET status_id = " . $status['status_id'] . " WHERE project_detail_id = " . $detail['project_detail_id'];
             $result = $this->db->query($sql);
             
-            return $result;
-            
+            return $result;       
         }
     }
-    
 }

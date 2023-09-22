@@ -236,9 +236,9 @@ function initialize(allow_edit = true, opt_add = true, opt_edit = true, opt_copy
                                     resource = this.ft.state.key.split(":");
 
                                     // Establece el recurso de dónde se abrió el editor
-                                    current = resource[1];
+                                    current = resource[1];                                    
 
-                                    if(!ifInArray(resource[1], editor_stack)){
+                                    if(!ifInArray(resource[1], editor_stack)){                    
                                         editor_stack.push(resource[1]);
                                         editor_id_stack.push(Number(1));
                                     }
@@ -677,13 +677,11 @@ function initialize(allow_edit = true, opt_add = true, opt_edit = true, opt_copy
                     window.loadedFilteredContent = 0;
 
                 }
-
                 try{
                     // Always declare this function to do something after loading the table
                     commonAfterApi();
                 }catch(e){}
             }
-
         }
         )
     }

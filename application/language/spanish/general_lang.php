@@ -10,10 +10,19 @@
  * Spanish array
  */
 
+ 
+// $lang["id_prueba"] = "id prueba";
+$lang["id_prueba"] = "Id";
+$lang["lista_prueba"] = "Pruebas";
+$lang["nombre"] = "Nombre";
+$lang["productos_lista_colciencias"] = "Productos Colciencias";
+$lang["grupos_colciencias_lista"] = "Min Ciencias";
+
 $lang["lineas_institucionales_lista"]  = "Líneas institucionales";
 $lang["categoria_grupo"]    = "Categoría";
 $lang["archivo_producto"]   = "Evidencia documental";
-$lang["avances"]            = "Avances";
+// $lang["avances"]            = "Avances";
+$lang["avances"]            = "Documentos soporte";
 $lang["productos"]            = "Productos";
 $lang["grupos_unihorizonte"]            = "Grupo de trabajo";
 $lang["docentes_grupos_unihorizonte"]            = "Docentes asociados";
@@ -45,7 +54,8 @@ $lang["codigo_institucional_proyecto"]=   "Código institucional";
 $lang["codigo_institucional_proyecto"]=   "Código institucional";
 $lang["acto_administrativo"]=   "Acto administrativo";
 $lang["grupo_unihorizonte"] =   "Grupo UH";
-$lang["grupo_colciencias"]  =   "Grupo Colciencias";
+// $lang["grupo_colciencias"]  =   "Grupo Colciencias";
+$lang["grupo_colciencias"]  =   "Min Ciencias";
 $lang["linea_investigacion_institucional"]=   "Línea de investigación";
 $lang["docente_lider"]      =   "Docente líder";
 $lang["facultad"]           =   "Facultad";
@@ -68,9 +78,9 @@ $lang["documento_estudiante"]= "Documento";
 $lang["proyectos"]          =   "Proyectos";
 $lang["proyecto"]           =   "Proyecto";
 
-$lang["nombre_avance"]      =   "Nombre del avance";
+$lang["nombre_avance"]      =   "Nombre del documento";
 $lang["fecha_entrega"]      =   "Fecha de entrega";
-$lang["archivo_avance"]     =   "Archivo de avance";
+$lang["archivo_avance"]     =   "Archivo de documento";
 $lang["id_avance"]          =   "Id";
 
 $lang["nombre_proyecto"]    =   "Nombre del proyecto";

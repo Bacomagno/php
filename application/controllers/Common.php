@@ -255,7 +255,6 @@ class Common extends CI_Controller {
         
         //$this->load->view('common/header', $data);
         $this->load->view('common/header_tasks', $data);
-        
         $data = array(
             'project_detail_id' => $detail,
             'form' => $form
@@ -270,7 +269,6 @@ class Common extends CI_Controller {
         }else{
             $this->load->view('common/forms/generic.php', $data);
         }
-        
         $this->load->view('common/footer_tasks');
     }
     
@@ -312,27 +310,21 @@ class Common extends CI_Controller {
                 'project_id' => $id,
                 $form => ''
             );
-            
             $this->model->insert_form_info($data);
 
             // Query again
             $res = $this->model->get_form_info($id, $form);
-            
         }
-
         $res = json_encode($res);
         $res = json_decode($res, true);
-
         echo $res[$form];
     }
     
     public function getOne() {
-        
         $id = rawurldecode($this->uri->segment(4));
         if(!isset($id) || empty($id)) {
             $id = $this->input->post('id');
         }
-        
         if(!isset($id) || empty($id)){
             //$id = rawurldecode($this->uri->segment(4));
             $data['info'] = $this->model->get_one($id);
@@ -340,14 +332,11 @@ class Common extends CI_Controller {
             $this->load->view('common/forms/' . $id, $data);
             $this->load->view('common/footer');
         } else {
-            
             if (isset($id) && !empty($id)) {
-                
                 $data = array(
                     'content' => $this->model->get_one($id),
                     'status' => true
                 );
-                
                 if($data['content'] != NULL){
                     header('Content-Type: application/json');
                     echo json_encode($data);
@@ -359,8 +348,7 @@ class Common extends CI_Controller {
                     header('Content-Type: application/json');
                     echo json_encode($data);
                 }
-            } else {
-                
+            } else {    
                 $data = array(
                     'content' => '',
                     'status' => false
@@ -383,9 +371,7 @@ class Common extends CI_Controller {
             $res["status"] = false;
             $res["info"] = "";
             echo json_encode($res);
-            
         }
-        
     }
     
     public function sendMail() {
@@ -407,7 +393,6 @@ class Common extends CI_Controller {
                 'charset' => 'utf-8',
                 'wordwrap' => TRUE
             );
-
             $this->load->library('email', $config);
             $this->email->set_newline("\r\n");
             $this->email->from($info['from'], $_SESSION['sysname']);

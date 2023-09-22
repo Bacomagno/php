@@ -18,7 +18,6 @@ class Model_common_api extends CI_Model {
 
     public function get_all($extra_table = "x", $extra_id = "x") {
         try {
-        
             // Obtiene los campos de la tabla seleccionada
             $self = $this->describe_table($this->table);
             
@@ -42,7 +41,6 @@ class Model_common_api extends CI_Model {
 
             // Continúa solo si existen claves foraneas procesa cada una de ellas
             if(!empty($fks)){
-
                 foreach($fks as $f){
 
                     // Evaluea que la columna exista en los campos de la tabla
@@ -103,8 +101,6 @@ class Model_common_api extends CI_Model {
 
                 if($extra_table !== "x" && $extra_id !== "x"){
 
-                    //echo "No son x sin where";
-
                     // Obtiene la columna que está relacionada con la tabla foranea
                     // para mostrar solo los resultados que tienen que ver con el 
                     // componente principal que se esté editando
@@ -116,15 +112,15 @@ class Model_common_api extends CI_Model {
                             break;
                         }
                     }
+                    // $sql = "SELECT " . join(", ", $fields) . " FROM " . join(", ", $from) . " WHERE " . $this->table . "." . $column . " = " . $extra_id . " AND " . $this->table . ".borrado = 0";
+                    $sql = "SELECT " . join(", ", $fields) . " FROM " . join(", ", $from) . " WHERE " . $this->table . "." . $column . " = " . $extra_id . " AND " . $this->table . ".borrado = 0 LIMIT 1";
 
-                    $sql = "SELECT " . join(", ", $fields) . " FROM " . join(", ", $from) . " WHERE " . $this->table . "." . $column . " = " . $extra_id . " AND " . $this->table . ".borrado = 0";
 
                     if($this->table === "om_users"){
                         $sql = $sql . " AND om_users.system_id = '" . $_SESSION["system"] . "'";
                     }
 
                 }else{
-
                     //echo "Almenos uno es x sin where";
                     $sql = "SELECT " . join(", ", $fields) . " FROM " . join(", ", $from);
 
@@ -138,9 +134,6 @@ class Model_common_api extends CI_Model {
             }else{
 
                 if($extra_table !== "x" && $extra_id !== "x"){
-
-                    //echo "No son x con where\n";
-
                     // Obtiene la columna que está relacionada con la tabla foranea
                     // para mostrar solo los resultados que tienen que ver con el 
                     // componente principal que se esté editando
@@ -160,7 +153,6 @@ class Model_common_api extends CI_Model {
                         $sql = $sql . " AND om_users.system_id = '" . $_SESSION["system"] . "'";
                     }
                     }else{
-
                         //echo "Almenos uno es x con where";
                         $sql = "SELECT " . join(", ", $fields) . " FROM " . join(", ", $from). " WHERE " . join(" AND ", $where) . " AND " . $this->table . ".borrado = 0";
                         if($this->table === "om_users"){
@@ -203,9 +195,7 @@ class Model_common_api extends CI_Model {
             }
             
             if($extra_table !== "x" && $extra_id !== "x"){
-    
-                // echo "No son x sin where";
-    
+
                 // Obtiene la columna que está relacionada con la tabla foranea
                 // para mostrar solo los resultados que tienen que ver con el 
                 // componente principal que se esté editando
@@ -220,13 +210,13 @@ class Model_common_api extends CI_Model {
                 }
     
                 $sql = "SELECT " . join(", ", $fields) . " FROM " . join(", ", $from) . " WHERE " . $this->table . "." . $column . " = " . $extra_id . " AND " . $this->table . ".borrado = 0";
-                
+
                 if($this->table === "om_users"){
                     $sql = $sql . " AND om_users.system_id = '" . $_SESSION["system"] . "'";
                 }
             }else{
-    
                 // echo "Almenos uno es x sin where";
+                // Se usa cuando va a cargar toda la lista
                 $sql = "SELECT " . join(", ", $fields) . " FROM " . join(", ", $from);
                 
                 if($this->table === "om_users"){
@@ -251,6 +241,7 @@ class Model_common_api extends CI_Model {
     
     public function get_one ($param = 0) {
         try {
+            
             // Find the primary key and allowed fields
             $self = $this->describe_table($this->table);
             $pk = '';

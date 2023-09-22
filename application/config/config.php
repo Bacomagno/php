@@ -25,9 +25,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 
 $config['base_url'] = 'http://virtual.unihorizonte.edu.co:9000/proyectosunihorizonte';
-// $config['base_url'] = 'http://virtual.unihorizonte.edu.co/proyectosunihorizonte';
-
-// $config['base_url'] = 'http://proyectosunihorizonte';
 
 /*
 |--------------------------------------------------------------------------

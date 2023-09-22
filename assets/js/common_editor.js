@@ -566,7 +566,6 @@ $(document).ready(function(){
                             // Establece la acción a editar para abrir el editor 
                             // del registro actual.
                             window.action = 'edit';
-                            
                             // Oscurece el fondo y muestra el spinner
                             $("div#div_loading").addClass("background-loading");
                             $("div#div_spinner").addClass("spinner-loading");

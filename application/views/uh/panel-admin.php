@@ -27,7 +27,7 @@ $b = $b[3];
 
             <div id="nav01" class="w3-bar-block">
                 <a class="w3-button w3-hover-teal w3-hide-large w3-large w3-right" href="javascript:void(0)" onclick="w3_close()">×</a>
-                <span class="w3-bar-item w3-border-bottom w3-large"><img src="<?php echo base_url("assets/images/logo-unihorizonte.jpg") ?>" style="width: inherit;"></span>
+                <span class="w3-bar-item w3-theme w3-border-bottom w3-large"><img src="<?php echo base_url("assets/images/logo-unihorizonte.jpg") ?>" style="width: inherit;"></span>
                 <a class="w3-bar-item w3-button pagina-principal" onclick="loadContent('#content_selected', 'home')">Indicadores</a>
                 <a class="w3-bar-item w3-button" onclick="loadContent('#content_selected', 'proyectos');">Proyectos</a>
             </div>
@@ -53,12 +53,12 @@ $b = $b[3];
                     Universidad <i class="fa fa-caret-down"></i></div>
                     <div id="demoAcc1" class="w3-hide w3-white w3-card-4">
                         <a class="w3-bar-item w3-button" onclick="loadContent('#content_selected', 'estudiantes');">Estudiantes</a>
-                        <a class="w3-bar-item w3-button" onclick="loadContent('#content_selected', 'grupos_colciencias_lista');">Grupos colciencias</a>
+                        <a class="w3-bar-item w3-button" onclick="loadContent('#content_selected', 'grupos_colciencias_lista');">Min Ciencias</a>
                         <a class="w3-bar-item w3-button" onclick="loadContent('#content_selected', 'lineas_institucionales_lista');">Lineas institucionales</a>
                         <a class="w3-bar-item w3-button" onclick="loadContent('#content_selected', 'productos_lista_colciencias');">Productos colciencias</a>
 
                         <a class="w3-bar-item w3-button" onclick="loadContent('#content_selected', 'facultades_lista');">Facultades</a>
-                        <a class="w3-bar-item w3-button" onclick="loadContent('#content_selected', 'lineas_facultad_lista');">Líneas por facultad</a>
+                        <!-- <a class="w3-bar-item w3-button" onclick="loadContent('#content_selected', 'lineas_facultad_lista');">Líneas por facultad</a> -->
                         <a class="w3-bar-item w3-button" onclick="loadContent('#content_selected', 'programa_academico_lista');">Programa académico</a>
                         <a class="w3-bar-item w3-button" onclick="loadContent('#content_selected', 'lineas_por_programa');">Líneas por programa</a>
                         <a class="w3-bar-item w3-button" onclick="loadContent('#content_selected', 'lista_prueba');">Pruebas</a>

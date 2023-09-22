@@ -14,11 +14,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Email extends CI_Controller {
     
     function __construct() {
-        
         parent::__construct();
         $this->load->library('session');
         $this->load->model('model_email');
-        
     } 
     
     public function index(){
@@ -59,7 +57,6 @@ class Email extends CI_Controller {
             $data = array(
                 'user_password' => sha1($human)
             );
-            
             $check = $this->model_email->updateUser($email, $data);
             
             if($check != 0){
@@ -70,14 +67,9 @@ class Email extends CI_Controller {
                 
                 unset($_SESSION['email']);
                 
-                $this->session->set_userdata('alert', true);
-                
-            }
-            
+                $this->session->set_userdata('alert', true);   
+            }   
         }
-        
-        redirect(base_url());
-        
+        redirect(base_url());   
     }
-    
 }

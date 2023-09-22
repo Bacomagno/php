@@ -4,7 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 <div class="w3-container w3-margin w3-card w3-section w3-light-grey w3-animate-bottom">
     
-    <h1 class="w3-xxlarge w3-text-theme avances">Avances</h1>
+    <h1 class="w3-xxlarge w3-text-theme avances">Documentos soporte</h1>
     
     <table id="t1" class="w3-table-all w3-margin-top w3-hoverable"></table>
     

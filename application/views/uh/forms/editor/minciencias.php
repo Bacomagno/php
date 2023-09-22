@@ -31,7 +31,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 </div>
 
 <script>
-    
+
     // Title
     $("div.title").addClass("title-" + editor_stack[editor_stack.length-1]).removeClass("title");
     

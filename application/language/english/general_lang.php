@@ -9,6 +9,7 @@
 /*
  * English array
  */
+$lang["nombre"] = "Name";
 
 $lang["nombre_proyecto"]    =   "en_Nombre del proyecto";
 $lang["marca"]              =   "Trademark";

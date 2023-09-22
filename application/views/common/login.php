@@ -70,7 +70,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <div class="w3-modal-content w3-card-4 w3-animate-zoom" style="max-width:600px">
 
                 <div class="w3-center"><br>
-                    <img src="<?php echo base_url("assets/images/logo-unihorizonte.jpg") ?>" alt="Logo unihorizonte" class="w3-margin-top w3-image w3-padding">
+                    <img src="<?php echo base_url("assets/images/logo-unihorizonte.jpg") ?>" alt="Logo unihorizonte" class="w3-margin-top w3-image w3-padding w3-theme">
                 </div>
 
                 <form id="login-form" class="w3-container" action="<?php echo base_url() ?>index.php/login/checklogin" role="form" method="post">
@@ -85,7 +85,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 </form>
 
                 <div class="w3-container w3-border-top w3-padding-16 w3-light-grey">
-                    <span class="w3-right w3-padding w3-hide-small"><a href="https://www.unihorizonte.edu.co">UniHorizonte</a></span>
+                    <span class="w3-right w3-padding w3-hide-small"><a target="_blank" href="https://www.unihorizonte.edu.co">Horizonte</a></span>
                 </div>
 
             </div>

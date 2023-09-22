@@ -150,6 +150,31 @@ INSERT INTO `om_facultades_lista`
 (`facultad_lista_id`, `name_facultad_lista`, `codificacion`, `borrado`, `log_accion`, `log_usuario`, `log_timestamp`) 
 VALUES
 
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `om_lista_prueba`
+--
+
+CREATE TABLE IF NOT EXISTS `om_lista_prueba` (
+  `id_prueba` int(11) NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(255) NOT NULL,
+  `descripcion` varchar(255) NOT NULL,
+  `borrado` int(11) NOT NULL DEFAULT '0',
+  `log_accion` varchar(255) NOT NULL DEFAULT 'add',
+  `log_usuario` varchar(255) DEFAULT 'No',
+  `log_timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id_prueba`),
+  UNIQUE KEY `nombre` (`nombre`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=255 ;
+
+--
+-- Volcado de datos para la tabla `om_lista_prueba`
+--
+
+INSERT INTO `om_lista_prueba` 
+(`id_prueba`, `nombre`, `descripcion`, `borrado`, `log_accion`, `log_usuario`, `log_timestamp`) 
+VALUES
 
 -- --------------------------------------------------------
 
@@ -769,6 +794,13 @@ ALTER TABLE `om_grupos_unihorizonte`
 --
 ALTER TABLE `om_lineas_facultad_lista`
   ADD CONSTRAINT `om_lineas_facultad_lista_ibfk_1` FOREIGN KEY (`facultad`) REFERENCES `om_facultades_lista` (`facultad_lista_id`) ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `om_lista_prueba`
+--
+ALTER TABLE `om_lista_prueba`
+  ADD CONSTRAINT `om_lista_prueba_ibfk_1` FOREIGN KEY (`facultad`) REFERENCES `om_lista_prueba` (`id_prueba`) ON UPDATE CASCADE;
+
 
 --
 -- Filtros para la tabla `om_lineas_por_programa`

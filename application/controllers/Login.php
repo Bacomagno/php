@@ -10,18 +10,19 @@ class Login extends CI_Controller {
         $this->load->helper('url');
         $this->load->helper('form');
         $this->load->library('session');
-        $this->load->model('model_login');  
+        $this->load->model('model_login'); 
     } 
-
+    
     public function index() {
         $this->loadLang();
+        
         // Go to the module if the user is currently logged in
         $in = $this->session->userdata('loggedin');
         if($in){
             header("Location: " . base_url() . $this->session->userdata('path'));
         }
         $this->load->view('common/login');
-    }
+    }           
     
     public function checklogin() {
         $username = $this->input->post('user_username');

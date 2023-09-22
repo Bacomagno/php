@@ -9,6 +9,7 @@
 /*
  * Portuguese array
  */
+$lang["nombre"] = "Nombre";
 
 $lang['txt_login_header']	=	"Conecte-Se";
 $lang['txt_accept']		=	"Aceitar";

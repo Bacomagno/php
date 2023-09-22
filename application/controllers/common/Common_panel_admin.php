@@ -543,43 +543,43 @@ class Common_panel_admin extends Main {
     
     function subirArchivo($id,$nom_archivo){
         
-        $this->checkLogin();
-        
-        //-------------------------------------------------------------------------------------------//
-        //                                                                                           //
-        //                      Inicio del código subir archivo                                      //
-        //                                                                                           //
-        //-------------------------------------------------------------------------------------------//
-        //Establece la información del archivo a cargar
-        
-        $config['upload_path'] = "documents/" . $this->session->userdata('folder') . "/";
-        $config['file_name'] = $id . "_" . $nom_archivo;
-        $config['allowed_types'] = "gif|jpg|png|jpeg|svg|doc|docx|pdf|xls|xlsx|XLSX|txt";
-        $config['overwrite'] = TRUE;
-        
-        //Carga la libreria para subida de archivos
-        $this->load->library('upload', $config);
-        
-        //Si ocurre un error subiendo el archivo
-        if (!$this->upload->do_upload($nom_archivo)) {
+            $this->checkLogin();
             
-            //Si hay errores con el archivo devuelve el nombre del error
-            $error = array('error' => $this->upload->display_errors());
+            //-------------------------------------------------------------------------------------------//
+            //                                                                                           //
+            //                      Inicio del código subir archivo                                      //
+            //                                                                                           //
+            //-------------------------------------------------------------------------------------------//
+            //Establece la información del archivo a cargar
             
-            print_r($error);
+            $config['upload_path'] = "documents/" . $this->session->userdata('folder') . "/";
+            $config['file_name'] = $id . "_" . $nom_archivo;
+            $config['allowed_types'] = "gif|jpg|png|jpeg|svg|doc|docx|pdf|xls|xlsx|XLSX|txt";
+            $config['overwrite'] = TRUE;
             
-            return false;    
-        } else {
+            //Carga la libreria para subida de archivos
+            $this->load->library('upload', $config);
             
-            //Si no hay errores con el archivo
-            $file =$this->upload->data();
-            
-            // Stores the file name globally in this class to update the project
-            $this->filename = $file["file_name"];
-            
-            return true;
-            
-        }
+            //Si ocurre un error subiendo el archivo
+            if (!$this->upload->do_upload($nom_archivo)) {
+
+                //Si hay errores con el archivo devuelve el nombre del error
+                $error = array('error' => $this->upload->display_errors());
+
+                print_r($error);
+
+                return false;    
+            } else {
+
+                //Si no hay errores con el archivo
+                $file =$this->upload->data();
+
+                // Stores the file name globally in this class to update the project
+                $this->filename = $file["file_name"];
+
+                return true;
+
+            }
 
         //-------------------------------------------------------------------------------------------//
         //                                                                                           //

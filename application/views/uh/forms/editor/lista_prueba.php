@@ -3,7 +3,7 @@ defined('BASEPATH') OR exit('no direct script access allowed');
 ?>
 
 <div class="title">
-    <span id="btn-close" title="" class="btn btn-default glyphicon glyphicon-remove pull-rigth btn_close_editor"> </span>
+    <span id="btn_close" title="" class="btn btn-default glyphicon glyphicon-remove pull-right btn_close_editor"></span>
     <h2><span id="txt_action"></span> <span id="number"></span></h2>
 </div>
 
@@ -66,12 +66,10 @@ defined('BASEPATH') OR exit('no direct script access allowed');
                     clearInterval(timer1);
 
                 }
-            }catch(e){
+            }catch(e) {
                 console.log($(e));
-                echo 'Error: ' . $e->getMessage();
-                //clearInterval(timer1);
-            }
-        }, 500);
+                header('Error Mode_common');
+        }}, 500);
         
     }
 
@@ -87,6 +85,7 @@ defined('BASEPATH') OR exit('no direct script access allowed');
 </script>
 
 <link rel="stylesheet" href="<?php echo base_url('assets/css/style_editor.css')?>">
+
 
 
 

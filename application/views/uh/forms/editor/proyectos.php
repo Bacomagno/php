@@ -46,7 +46,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <div id="content_estudiantes"></div>
 </div>
 
-
 <script>
     
     // Obtener número consecutivo
@@ -73,8 +72,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     // Usar cuando un select identificado con "name" dependa de otro
     window["selectRestrictions_" + editor_stack[editor_stack.length-1]] = [
         // el campo dependiente, seguido de el campo requerido, seguido por el recurso del campo requerido
-        {field_name: "linea_facultad", requires: "facultad", resource: "facultades_lista"},
-        {field_name: "programa_academico", requires: "linea_facultad", resource: "lineas_facultad_lista"},
+        // {field_name: "linea_facultad", requires: "facultad", resource: "facultades_lista"},
+        // {field_name: "programa_academico", requires: "linea_facultad", resource: "lineas_facultad_lista"},
+        {field_name: "programa_academico", requires: "facultad", resource: "facultades_lista"},
         {field_name: "linea_programa", requires: "programa_academico", resource: "programa_academico_lista"}
     ];
     
@@ -125,7 +125,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                 //clearInterval(timer1);
                             }
                         }, 400*5);
-
                         var timer2 = setInterval(function () {
                             try{
                                 if(window["ft_" + "productos"].initialized){
@@ -136,8 +135,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                 console.log($(e));
                                 //clearInterval(timer2);
                             }
-                        }, 400*6);
-                        
+                        }, 400*6);                        
                         var timer3 = setInterval(function () {
                             try{
                                 if(window["ft_" + "grupos_unihorizonte"].initialized){
@@ -148,8 +146,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                 console.log($(e));
                                 //clearInterval(timer3);
                             }
-                        }, 400*7);
-                        
+                        }, 400*7);                        
                         var timer4 = setInterval(function () {
                             try{
                                 if(window["ft_" + "grupos_unihorizonte"].initialized){
@@ -168,33 +165,26 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                 console.log($(e));
                                 //clearInterval(timer4);
                             }
-                        }, 400*8);
-                        
-                    }else{
-                        
+                        }, 400*8);                        
+                    }else{                        
                         // Al copiar quita los campos que obligan a refrescar 
                         // el consecutivo
-                        if(action === "copy"){
-                            
+                        if(action === "copy"){                            
                             $("form#" + editor_stack[editor_stack.length-1] + " input[name='nombre_proyecto']").val("");
                             $("form#" + editor_stack[editor_stack.length-1] + " input[name='codigo_institucional_proyecto']").val("");
                             $("form#" + editor_stack[editor_stack.length-1] + " input[name='fecha_inicio']").val("");
                             $("form#" + editor_stack[editor_stack.length-1] + " input[name='fecha_final']").val("");
                             
                             $("form#" + editor_stack[editor_stack.length-1] + " select[name='facultad']").html("");
-                            $("form#" + editor_stack[editor_stack.length-1] + " select[name='linea_facultad']").html("");
+                            // $("form#" + editor_stack[editor_stack.length-1] + " select[name='linea_facultad']").html("");
                             $("form#" + editor_stack[editor_stack.length-1] + " select[name='programa_academico']").html("");
                             $("form#" + editor_stack[editor_stack.length-1] + " select[name='linea_programa']").html("");
                             
                             // Restablece el valor campo presupuesto_ejecutado a cero.
-                            $("form#" + editor_stack[editor_stack.length-1] + " input[name='presupuesto_ejecutado']").val(0);
-                            
-                        }
-                        
-                        actualizar_consecutivo();
-                        
-                    }
-                    
+                            $("form#" + editor_stack[editor_stack.length-1] + " input[name='presupuesto_ejecutado']").val(0);                            
+                        }                        
+                        actualizar_consecutivo();                        
+                    }                    
                     // Establece el campo codigo_institucional_proyecto como de solo lectura
                     $("form#" + editor_stack[editor_stack.length-1] + " input[name='codigo_institucional_proyecto']").attr("readonly", "readonly");
                     
@@ -205,50 +195,37 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     $("form#" + editor_stack[editor_stack.length-1] + " input[name='fecha_inicio']").on("change", function(){
                         
                         var a = $("select[name='facultad']").val();
-                        var b = $("select[name='linea_facultad']").val();
+                        // var b = $("select[name='linea_facultad']").val();
                         
                         // Evalúa si se eligió facultad y línea de facultad para crear el código institucional
-                        if(a == null || b == null ){
+                        // if(a == null || b == null ){
+                        if(a == null ){
                             
                             // Borra cualquier valor elegido
                             this.value = "";
                             
                             // Avisa que falta alguno de los dos select por escoger
-                            alert("Falta Facultad y/o Línea de Facultad.");
-                            
+                            alert("Falta Facultad");
                         }else{
-                            
-                            actualizar_codigo();
-                            
-                        }
-                        
+                            actualizar_codigo();   
+                        } 
                     });
-
                     clearInterval(timer0);
-
                 }
             }catch(e){
                 console.log($(e));
                 //clearInterval(timer1);
             }
-        }, 500);
-        
-        
+        }, 500); 
     }
-
-    function actualizar_codigo(){
-        
-        var txt = "";
-                            
+    function actualizar_codigo(){        
+        var txt = "";                            
         txt += $("form#" + editor_stack[editor_stack.length-1] + " select[name='facultad']").find(":selected").data("codificacion");
         txt += $("form#" + editor_stack[editor_stack.length-1] + " select[name='programa_academico']").find(":selected").data("codificacion");
         txt += consecutivo;
-
         // Actualiza el campo código institucional
-        $("form#" + editor_stack[editor_stack.length-1] + " input[name='codigo_institucional_proyecto']").val(txt);
-        
+        $("form#" + editor_stack[editor_stack.length-1] + " input[name='codigo_institucional_proyecto']").val(txt);        
     }
-
     // Obtiene el numero consecutivo de este sistema
     function actualizar_consecutivo(){
         
@@ -264,28 +241,20 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             },
             success: function (data, textStatus, jqXHR) {
                 data = JSON.parse(data);
-
                 if(data.status){
-
                     var txt = data.index.toString();
-
                     while(txt.toString().length < 4){
 
                         txt = "0" + txt;
 
                     }
-
-
                     consecutivo = txt;
                 }
-
                 // Quita el fondo y el spinner cuando se cargue todo
                 $("div#div_loading").removeClass("background-loading");
                 $("div#div_spinner").removeClass("spinner-loading");
-
             }
-        });
-        
+        });        
     }
 
     // Qué hacer cuando el select esté cargado
@@ -349,15 +318,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             }
                         });*/
                         
-                    }
-                 
-                }
-                
-                
-                $("form#" + editor_stack[editor_stack.length-1] + " select#" + "pais").removeAttr("disabled");
-                
-            }
-            
+                    }                 
+                }                
+                $("form#" + editor_stack[editor_stack.length-1] + " select#" + "pais").removeAttr("disabled");                
+            }            
             // Lo que hace cuando se elige el país
             if($("form#" + editor_stack[editor_stack.length-1] + " select[name='pais']").val() !== null){
                 
