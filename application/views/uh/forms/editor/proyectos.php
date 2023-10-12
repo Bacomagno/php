@@ -8,42 +8,84 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 </div>
 
 <div id="main_div" class="col-xs-12">
-    <form id="f1" name="main_form" class="form-horizontal" method="post">
-        <div class="panel-group">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h4 class="panel-title">
-                        <a data-toggle="collapse" href="#collapse2">
-                            <span class="glyphicon glyphicon-minus-sign"></span>
-                        </a>
-                    </h4>
-                </div>
-                <div id="collapse2" class="panel-collapse collapse in">
-                    <div class="panel-body">
-                        <div class="row">
-                            <div class="col-md-8 col-md-offset-2 my-inputs"></div>                            
+    <div class="container">
+        <ul class="nav nav-tabs" id="myTabs">
+            <li class="active"><a href="#formulario" data-toggle="tab">Formulario</a></li>
+            <li><a href="#avances" data-toggle="tab">Documentos soporte</a></li>
+            <li><a href="#productos" data-toggle="tab">Productos</a></li>
+            <li><a href="#docentes" data-toggle="tab">Docentes</a></li>
+            <li><a href="#estudiantes" data-toggle="tab">Estudiantes</a></li>
+            <li><a href="#pro_minciencias" data-toggle="tab">Grupo Minciencias</a></li>
+            <li><a href="#pro_facultades" data-toggle="tab">Facultades</a></li>
+            <li><a href="#pro_programas" data-toggle="tab">Programas</a></li>
+            <li><a href="#pro_lineas_programas" data-toggle="tab">Lineas de programas</a></li>
+        </ul>
+
+        <div class="tab-content">
+            <div class="tab-pane active" id="formulario">
+                <form id="f1" name="main_form" class="form-horizontal" method="post">
+                    <div class="panel-group">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                    <a data-toggle="collapse" href="#collapse2">
+                                        <span class="glyphicon glyphicon-minus-sign"></span>
+                                    </a>
+                                </h4>
+                            </div>
+                            <div id="collapse2" class="panel-collapse collapse in">
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <div class="col-md-8 col-md-offset-2 my-inputs"></div>                            
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
+                </form>
+            </div>
+            <div class="tab-pane" id="avances">
+                <div class="col-md-6 extra_content">
+                    <div id="content_avances"></div>
+                </div>
+            </div>
+            <div class="tab-pane" id="productos">
+                <div class="col-md-6 extra_content">
+                    <div id="content_productos"></div>
+                </div>
+            </div>
+            <div class="tab-pane" id="docentes">
+                <div class="col-md-6 extra_content">
+                    <div id="content_docentes"></div>
+                </div>
+            </div>
+            <div class="tab-pane" id="estudiantes">
+                <div class="col-md-6 extra_content">
+                    <div id="content_estudiantes"></div>
+                </div>
+            </div>
+            <div class="tab-pane" id="pro_facultades">
+                <div class="col-md-6 extra_content">
+                    <div id="content_pro_facultades"></div>
+                </div>
+            </div>
+            <div class="tab-pane" id="pro_programas">
+                <div class="col-md-6 extra_content">
+                    <div id="content_pro_programas"></div>
+                </div>
+            </div>
+            <div class="tab-pane" id="pro_minciencias">
+                <div class="col-md-6 extra_content">
+                    <div id="content_pro_minciencias"></div>
+                </div>
+            </div>
+            <div class="tab-pane" id="pro_lineas_programas">
+                <div class="col-md-6 extra_content">
+                    <div id="content_pro_lineas_programas"></div>
                 </div>
             </div>
         </div>
-    </form>
-</div>
-
-<div class="col-md-6 extra_content">
-    <div id="content_avances"></div>
-</div>
-    
-<div class="col-md-6 extra_content">
-    <div id="content_productos"></div>
-</div>
-
-<div class="col-md-6 extra_content">
-    <div id="content_docentes"></div>
-</div>
-
-<div class="col-md-6 extra_content">
-    <div id="content_estudiantes"></div>
+    </div>
 </div>
 
 <script>
@@ -69,14 +111,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     // Form
     $("form#f1").attr("id", editor_stack[editor_stack.length-1]);
 
-    // Usar cuando un select identificado con "name" dependa de otro
-    window["selectRestrictions_" + editor_stack[editor_stack.length-1]] = [
-        // el campo dependiente, seguido de el campo requerido, seguido por el recurso del campo requerido
-        // {field_name: "linea_facultad", requires: "facultad", resource: "facultades_lista"},
-        // {field_name: "programa_academico", requires: "linea_facultad", resource: "lineas_facultad_lista"},
-        {field_name: "programa_academico", requires: "facultad", resource: "facultades_lista"},
-        {field_name: "linea_programa", requires: "programa_academico", resource: "programa_academico_lista"}
-    ];
+    // // Usar cuando un select identificado con "name" dependa de otro
+    // window["selectRestrictions_" + editor_stack[editor_stack.length-1]] = [
+    //     // el campo dependiente, seguido de el campo requerido, seguido por el recurso del campo requerido
+    //     {field_name: "linea_facultad", requires: "facultad", resource: "facultades_lista"},
+    //     {field_name: "programa_academico", requires: "linea_facultad", resource: "lineas_facultad_lista"},
+    //     {field_name: "linea_programa", requires: "programa_academico", resource: "programa_academico_lista"}
+    // ];
     
     // Usar cuando se requiera que el select o los select dados tengan "meta-datos" para obtenerlos con data.
     window["selectData_" + editor_stack[editor_stack.length-1]] = [
@@ -98,14 +139,21 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         // Actualiza el elemento cuando esté visible
         var timer0 = setInterval(function () {
             try{
+                // if ($("#f1").length > 0) {
+                if($("form#" + editor_stack[editor_stack.length-1]).length > 0){
+                    // Oculta el campo "archivo_proyecto" por su nombre
+                    $("label[for='archivo_proyecto']").hide();
+                    $("input[name='archivo_proyecto']").hide();
+                    $("div.form-group > div.col-md-4 > span.form-control").hide();
+                }
                 // Cuando el formulario esté cargado
                 if($("form#" + editor_stack[editor_stack.length-1]).length > 0){
-
                     // Load additional content when required
                     if(action === "edit"){
 
                         if(Number(consecutivo) == 0){
                             consecutivo = $("form#" + editor_stack[editor_stack.length-1] + " input[name='codigo_institucional_proyecto']").val();
+                        }else{
                         }
 
                         // Change the components size for this view
@@ -124,30 +172,74 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                 console.log($(e));
                                 //clearInterval(timer1);
                             }
-                        }, 400*5);
+                        }, 400*3);
                         var timer2 = setInterval(function () {
                             try{
                                 if(window["ft_" + "productos"].initialized){
-                                    loadContent("#content_docentes", "grupos_unihorizonte", editor_stack[0]);
+                                    loadContent("#content_estudiantes", "grupos_unihorizonte", editor_stack[0]);
                                     clearInterval(timer2);
                                 }
                             }catch(e){
                                 console.log($(e));
                                 //clearInterval(timer2);
                             }
-                        }, 400*6);                        
+                        }, 400*4);                        
                         var timer3 = setInterval(function () {
                             try{
                                 if(window["ft_" + "grupos_unihorizonte"].initialized){
-                                    loadContent("#content_estudiantes", "docentes_grupos_unihorizonte", editor_stack[0]);
+                                    loadContent("#content_docentes", "docentes_grupos_unihorizonte", editor_stack[0]);
                                     clearInterval(timer3);
                                 }
                             }catch(e){
                                 console.log($(e));
                                 //clearInterval(timer3);
                             }
-                        }, 400*7);                        
+                        }, 400*5);
                         var timer4 = setInterval(function () {
+                            try{
+                                if(window["ft_" + "docentes_grupos_unihorizonte"].initialized){
+                                    loadContent("#content_pro_facultades", "proyectos_facultades", editor_stack[0]);
+                                    clearInterval(timer4);
+                                }
+                            }catch(e){
+                                console.log($(e));
+                                //clearInterval(timer3);
+                            }
+                        }, 400*6);
+                        var timer5 = setInterval(function () {
+                            try{
+                                if(window["ft_" + "proyectos_facultades"].initialized){
+                                    loadContent("#content_pro_minciencias", "proyectos_minciencias", editor_stack[0]);
+                                    clearInterval(timer5);
+                                }
+                            }catch(e){
+                                console.log($(e));
+                                //clearInterval(timer3);
+                            }
+                        }, 400*7);
+                        var timer6 = setInterval(function () {
+                            try{
+                                if(window["ft_" + "proyectos_minciencias"].initialized){
+                                    loadContent("#content_pro_programas", "proyectos_programas", editor_stack[0]);
+                                    clearInterval(timer6);
+                                }
+                            }catch(e){
+                                console.log($(e));
+                                //clearInterval(timer3);
+                            }
+                        }, 400*8);
+                        var timer7 = setInterval(function () {
+                            try{
+                                if(window["ft_" + "proyectos_programas"].initialized){
+                                    loadContent("#pro_lineas_programas", "proyectos_lineas_programa", editor_stack[0]);
+                                    clearInterval(timer7);
+                                }
+                            }catch(e){
+                                console.log($(e));
+                                //clearInterval(timer3);
+                            }
+                        }, 400*9);
+                        var timer8 = setInterval(function () {
                             try{
                                 if(window["ft_" + "grupos_unihorizonte"].initialized){
                                     
@@ -156,16 +248,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                     
                                     // Quita el fondo y el spinner
                                     $("div#div_loading").removeClass("background-loading");
-                                    $("div#div_spinner").removeClass("spinner-loading");
-                                    
-                                    clearInterval(timer4);
-                                    
+                                    $("div#div_spinner").removeClass("spinner-loading");                                    
+                                    clearInterval(timer8);                                    
                                 }
                             }catch(e){
                                 console.log($(e));
                                 //clearInterval(timer4);
                             }
-                        }, 400*8);                        
+                        }, 400*10);                     
                     }else{                        
                         // Al copiar quita los campos que obligan a refrescar 
                         // el consecutivo
@@ -198,9 +288,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         // var b = $("select[name='linea_facultad']").val();
                         
                         // Evalúa si se eligió facultad y línea de facultad para crear el código institucional
-                        // if(a == null || b == null ){
                         if(a == null ){
-                            
                             // Borra cualquier valor elegido
                             this.value = "";
                             
@@ -244,9 +332,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 if(data.status){
                     var txt = data.index.toString();
                     while(txt.toString().length < 4){
-
                         txt = "0" + txt;
-
                     }
                     consecutivo = txt;
                 }
@@ -259,18 +345,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
     // Qué hacer cuando el select esté cargado
     function commonAfterSelect(select_name){
-         
-        /*switch (select_name) {
-            case "tipo_solicitud":
-
-                // TO DO....
-
-                break;
-
-            default:
-
-                break;
-        }*/
 
         // Evento de bootstrap select para el select específico...
         //console.log("form#" + editor_stack[editor_stack.length-1] + " select#" + select_name);
@@ -333,13 +407,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     $("form#" + editor_stack[editor_stack.length-1] + " select[name='agente_" + whereAmI + "']").selectpicker("destroy");
                     $("form#" + editor_stack[editor_stack.length-1] + " select[name='agente_" + whereAmI + "']").html('<option selected value="93">Option.</option>');
                 }
-
-                $("form#" + editor_stack[editor_stack.length-1] + " input[name='nombre_consecutivo']").val(pais_cod1 + current_consecutivo);
-                
-            }
-            
-        });
-        
+                $("form#" + editor_stack[editor_stack.length-1] + " input[name='nombre_consecutivo']").val(pais_cod1 + current_consecutivo);                
+            }            
+        });        
     }
 
     // Set to "true" if you want the system to create the form automatically

@@ -64,11 +64,9 @@ class Common_panel_admin extends Main {
             "action" => $param1,
             "current" => $param2,
             "index" => $param3,
-        );
+        );        
         
-        //$this->load->view('common/header', array('system_name' => $_SESSION["sysname"]));
         $this->load->view($this->session->userdata('folder') . '/forms/editor/' . $param2, $data);
-        //$this->load->view('common/footer');
         
     }
     
@@ -131,7 +129,6 @@ class Common_panel_admin extends Main {
             $post["log_timestamp"] = date("Y-m-d h:m:s");
             
             $id = $this->model->insert($post);
-            
             //Si el usario escogió almenos una imágen
             if (!empty($_FILES)) {
                 foreach ($_FILES as $key => $value) {

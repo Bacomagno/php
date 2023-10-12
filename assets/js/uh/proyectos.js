@@ -13,7 +13,6 @@ var orderedColumns = [
     {name: 'linea_investigacion_institucional', breakpoints: 'all', visible: true, filterable: true, required:true},
     {name: 'docente_lider', breakpoints: 'all', visible: true, filterable: true, required:true},
     {name: 'facultad', breakpoints: 'all', visible: true, filterable: true, required:true},
-    {name: 'linea_facultad', breakpoints: 'all', visible: true, filterable: true, required:true},
     {name: 'programa_academico', breakpoints: 'all', visible: true, filterable: true, required:true},
     {name: 'linea_programa', breakpoints: 'all', visible: true, filterable: true, required:true},
     {name: 'presupuesto_asignado', breakpoints: 'all', visible: true, filterable: true, required:true},
@@ -21,7 +20,7 @@ var orderedColumns = [
     {name: 'producto_esperado', breakpoints: 'all', visible: true, filterable: true, required:true},
     {name: 'fecha_inicio', breakpoints: 'xs sm', visible: true, filterable: true, required:true},
     {name: 'fecha_final', breakpoints: 'xs sm', visible: true, filterable: true, required:false},
-    {name: 'archivo_informe_final', breakpoints: '', visible: true, filterable: true, required:false},
+    {name: 'archivo_proyecto', breakpoints: '', visible: true, filterable: true, required:false},
     {name: 'presupuesto_ejecutado', breakpoints: 'all', visible: true, filterable: true, required:false},
     {name: 'estado', breakpoints: 'xs sm', visible: true, filterable: true, required:false},
     {name: 'detalle_estado', breakpoints: 'all', visible: true, filterable: true, required:false}
@@ -29,13 +28,14 @@ var orderedColumns = [
 ];
 
 $(document).ready(function () {
-    
+    if ($("#main_div").length > 0) {
+        // Oculta el campo "archivo_proyecto" por su nombre
+        $("input[name='archivo_proyecto']").hide();
+    }
     $.getScript(location.protocol + '//' + location.host + '/' + location.pathname.split("/")[1] + '/assets/js/' + commonMode + '.js', function(){
-        
         // AllowEdit Add, Edit, Copy, Delete
 	initialize(true, true, true, true, true);
     });
-    
 });
 
 // Always declare this function to do something before loading the table

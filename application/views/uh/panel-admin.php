@@ -53,7 +53,7 @@ $b = $b[3];
                     Universidad <i class="fa fa-caret-down"></i></div>
                     <div id="demoAcc1" class="w3-hide w3-white w3-card-4">
                         <a class="w3-bar-item w3-button" onclick="loadContent('#content_selected', 'estudiantes');">Estudiantes</a>
-                        <a class="w3-bar-item w3-button" onclick="loadContent('#content_selected', 'grupos_colciencias_lista');">Min Ciencias</a>
+                        <a class="w3-bar-item w3-button" onclick="loadContent('#content_selected', 'grupos_colciencias_lista');">Grupo Minciencias</a>
                         <a class="w3-bar-item w3-button" onclick="loadContent('#content_selected', 'lineas_institucionales_lista');">Lineas institucionales</a>
                         <a class="w3-bar-item w3-button" onclick="loadContent('#content_selected', 'productos_lista_colciencias');">Productos colciencias</a>
 
@@ -61,7 +61,6 @@ $b = $b[3];
                         <!-- <a class="w3-bar-item w3-button" onclick="loadContent('#content_selected', 'lineas_facultad_lista');">Líneas por facultad</a> -->
                         <a class="w3-bar-item w3-button" onclick="loadContent('#content_selected', 'programa_academico_lista');">Programa académico</a>
                         <a class="w3-bar-item w3-button" onclick="loadContent('#content_selected', 'lineas_por_programa');">Líneas por programa</a>
-                        <a class="w3-bar-item w3-button" onclick="loadContent('#content_selected', 'lista_prueba');">Pruebas</a>
                     </div>
                     
                     <div class="w3-bar-item w3-button" onclick="myAccFunc('demoAcc2')">

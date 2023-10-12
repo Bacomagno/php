@@ -32,114 +32,78 @@ function initialize(allow_edit = true, opt_add = true, opt_edit = true, opt_copy
             },
             success: function (data, textStatus, jqXHR) {
 
-                // Agrega los campos que falten al objeto columns (name, required...)
-                for(c in data.columns){
-
+                for (var c in data.columns) {
                     data.columns[c]["name"] = data.columns[c]["Field"];
-
+                
                     // Store the primary key into the given variable
-                    // its used in various places ahead.
-                    if(data.columns[c]["Key"] === "PRI"){
+                    // it's used in various places ahead.
+                    if (data.columns[c]["Key"] === "PRI") {
                         window["key_" + current] = data.columns[c]["Field"];
                     }
-
-                    // Set the value required as true for the fields with multivalues
-                    // primarily.
-                    if(data.columns[c]["Key"] === "MUL"){
+                
+                    // Set the value required as true for the fields with multivalues primarily.
+                    if (data.columns[c]["Key"] === "MUL") {
                         data.columns[c]["required"] = true;
                     }
-
-                    // Load the image if any field contain one of the following names
-                    if(data.columns[c]["Field"].indexOf("imagen") >= 0 || data.columns[c]["Field"].indexOf("image") >= 0 || data.columns[c]["Field"].indexOf("img") >= 0){
-                        for(i in data.rows){
-                            if(data.rows[i][data.columns[c]["Field"]] == "" || data.rows[i][data.columns[c]["Field"]].indexOf(".") < 0){
+                
+                    // Load the image if any field contains one of the following names
+                    if (data.columns[c]["Field"].indexOf("imagen") >= 0 || data.columns[c]["Field"].indexOf("image") >= 0 || data.columns[c]["Field"].indexOf("img") >= 0) {
+                        for (var i in data.rows) {
+                            if (data.rows[i][data.columns[c]["Field"]] == "" || data.rows[i][data.columns[c]["Field"]].indexOf(".") < 0) {
                                 data.rows[i][data.columns[c]["Field"]] = "<img src='" + location.origin + "/" + whereAmI + "/documents/" + whereAmI + "/default.png'  style='width: 60px;'>";
-                            }else{
+                            } else {
                                 data.rows[i][data.columns[c]["Field"]] = "<img src='" + location.origin + "/" + whereAmI + "/documents/" + whereAmI + "/" + data.rows[i][data.columns[c]["Field"]] + "'  style='width: 60px;'>";
                             }
+                            console.log("com_api_57", data.rows);
                         }
                     }
-                    // Load the document if any field contain one of the following names
-                    if(data.columns[c]["Field"].indexOf("archivo_") >= 0){
-
-                        for(i in data.rows){
-                            if(data.rows[i][data.columns[c]["Field"]] == "" || data.rows[i][data.columns[c]["Field"]].indexOf(".") < 0){
-                                //data.rows[i][data.columns[c]["Field"]] = "<img src='" + location.origin + "/" + whereAmI + "/documents/" + whereAmI + "/default.png'  style='width: 60px;'>";
-                            }else{
-
-                                var icon = "fa fa-folder-open";
-
-                                switch (data.rows[i][data.columns[c]["Field"]].split(".")[1]) {
+                    // Load the document if any field contains one of the following names
+                    if (data.columns[c]["Field"].indexOf("archivo_") >= 0) {
+                        for (var i in data.rows) {
+                            if (data.rows[i][data.columns[c]["Field"]] && data.rows[i][data.columns[c]["Field"]].indexOf(".") >= 0) {
+                                var extension = data.rows[i][data.columns[c]["Field"]].split(".")[1];
+                                var icon = "";
+                                switch (extension.toLowerCase()) {
                                     case "doc":
-                                        icon = "fa fa-file-word-o";
-                                        break;
-
                                     case "docx":
                                         icon = "fa fa-file-word-o";
                                         break;
-                                
                                     case "pdf":
                                         icon = "fa fa-file-pdf-o";
                                         break;
-
-
                                     case "gif":
-                                        icon = "fa fa-file-image-o";
-                                        break;
-
                                     case "jpg":
-                                        icon = "fa fa-file-image-o";
-                                        break;
-
                                     case "png":
                                         icon = "fa fa-file-image-o";
                                         break;
-
                                     case "jpeg":
-                                        icon = "fa fa-file-image-o";
-                                        break;
-
                                     case "svg":
-                                        icon = "fa fa-file-image-o";
-                                        break;
-
                                     case "jfif":
                                         icon = "fa fa-file-image-o";
                                         break;
-
                                     case "xls":
-                                        icon = "fa fa-file-excel-o";
-                                        break;
-
                                     case "xlsx":
                                         icon = "fa fa-file-excel-o";
                                         break;
-
-                                    case "XLSX":
-                                        icon = "fa fa-file-excel-o";
-                                        break;
-
                                     case "txt":
                                         icon = "fa fa-file-text-o";
                                         break;
-
                                     default:
+                                        icon = "fa fa-folder-open";
                                         break;
-                                }	
-
+                                }
                                 data.rows[i][data.columns[c]["Field"]] = "<a target='_blank' href='" + location.origin + "/" + location.pathname.split("/")[1] + "/documents/" + whereAmI + "/" + data.rows[i][data.columns[c]["Field"]] + "'><i class='" + icon + "' style='font-size:24px'></i></a>";
+                            } else {
+                                // Handle the case when the field does not contain a valid extension
+                                data.rows[i][data.columns[c]["Field"]] = "";
                             }
                         }
-
                     }
-
                 }
 
                 // Set orderedColumns Array to data.columns if it is empty.
                 // If orderedColumns Array is set then aggregates the default
                 // required attributes
-
-                //console.log(orderedColumns.length);
                 if($(orderedColumns).length === 0){
                     orderedColumns = data.columns;
                 }
@@ -260,14 +224,10 @@ function initialize(allow_edit = true, opt_add = true, opt_edit = true, opt_copy
                                             if (status === 'error') {
                                                 alert(status + ": " + xhr.status + " (" + xhr.statusText + ")");
                                             }else{
-
                                                 if(editor_stack.length === 1){
-
                                                     // Oculta la foo table del recurso actual
                                                     $("div#content_selected").addClass("hidden");
-
                                                 }else if(editor_stack.length > 1){
-
                                                     // Oculta los editores que no sean el ultimo que se abrió
                                                     for(e in editor_stack){
                                                         if(e != editor_stack.length-1){
@@ -327,7 +287,7 @@ function initialize(allow_edit = true, opt_add = true, opt_edit = true, opt_copy
                                                         alert(textStatus + ": " + errorThrown);
                                                     },
                                                     success: function (data, textStatus, jqXHR) {
-
+                                                        console.log("com_api_296", data.rows);
                                                         var locked = false;
 
                                                         for(r in data.rows){
@@ -422,9 +382,7 @@ function initialize(allow_edit = true, opt_add = true, opt_edit = true, opt_copy
 
                                                                             // Oculta la tabla de datos principal
                                                                             $("div#content_selected").addClass("hidden");
-
                                                                         }else if(editor_stack.length > 1){
-
                                                                             // Oculta los editores que no sean el ultimo que se abrió
                                                                             for(e in editor_stack){
                                                                                 if(e != editor_stack.length-1){

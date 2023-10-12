@@ -1,5 +1,4 @@
 <?php
-
 /* 
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -9,31 +8,49 @@
 /*
  * Spanish array
  */
-
- 
 // $lang["id_prueba"] = "id prueba";
 $lang["id_prueba"] = "Id";
 $lang["lista_prueba"] = "Pruebas";
+
+$lang["id_proyecto_lista"] = "Proyecto";
+
+$lang["id_proyecto_facultad_lista"] = "Id";
+$lang["id_facultad_lista"] = "Facultad";
+$lang["proyectos_facultades"] = "Facultades";
+
+$lang["id_proyecto_minciencias_lista"] = "Id";
+$lang["id_minciencias_lista"] = "Grupo Minciencias";
+$lang["proyectos_minciencias"] = "Grupo Minciencias";
+
+$lang["id_proyecto_linea_programa_lista"] = "Id";
+$lang["id_lineas_programas_lista"] = "Lineas de programas";
+$lang["proyectos_lineas_programa"] = "Lineas de programas";
+
+$lang["id_proyecto_programa_lista"] = "Id";
+$lang["id_programas_lista"] = "Programa académico";
+$lang["proyectos_programas"] = "Programas académicos";
+
+$lang["id_tipo_documento"] = "Id";
+$lang["tipos_documentos"] = "Tipo de documento";
+$lang["tipo_documento"] = "Tipo de documento";
+
+$lang["docente"] = "Docente";
 $lang["nombre"] = "Nombre";
 $lang["productos_lista_colciencias"] = "Productos Colciencias";
-$lang["grupos_colciencias_lista"] = "Min Ciencias";
+$lang["grupos_colciencias_lista"] = "Grupo Minciencias";
 
 $lang["lineas_institucionales_lista"]  = "Líneas institucionales";
 $lang["categoria_grupo"]    = "Categoría";
 $lang["archivo_producto"]   = "Evidencia documental";
-// $lang["avances"]            = "Avances";
 $lang["avances"]            = "Documentos soporte";
 $lang["productos"]            = "Productos";
 $lang["grupos_unihorizonte"]            = "Grupo de trabajo";
 $lang["docentes_grupos_unihorizonte"]            = "Docentes asociados";
-
 $lang["detalle_estado"]            = "Detalle del estado";
-
 $lang["facultad_lista_id"]  = "Id";
 $lang["facultades_lista"]   = "Facultades";
 $lang["name_facultad_lista"]= "Facultad";
 $lang["codificacion"]       = "Codificación";
-
 $lang["id_linea_facultad_lista"] = "Id";
 $lang["nombre_linea_facultad_lista"] = "Línea por facultad";
 

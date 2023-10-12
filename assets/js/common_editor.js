@@ -34,15 +34,12 @@ $(document).ready(function(){
             
             // Add the columns wich are not actually in the JSON data
             for(c in data.columns){
-
                 data.columns[c]["name"] = data.columns[c]["Field"];
-
                 var type = data.columns[c]["Type"];
                 type = type.split(/\s+/);
                 type = type[0];
                 type = type.replace(/\(.*\)/g, "");
                 data.columns[c]["type"] = fieldType(type);
-
                 data.columns[c]["title"] = data.columns[c]["Field"];
 
                 if(data.columns[c]["Key"] !== "PRI"){
@@ -61,24 +58,18 @@ $(document).ready(function(){
 
                 // Create inputs, textareas and selects according to the order 
                 // given in the window["orderedColumns_" + editor_stack[editor_stack.length -1]] array
-                for(i in window["orderedColumns_" + editor_stack[editor_stack.length -1]]){
-                    
-                    for(j in data.columns){
-                        
+                for(i in window["orderedColumns_" + editor_stack[editor_stack.length -1]]){                    
+                    for(j in data.columns){                        
                         if(window["orderedColumns_" + editor_stack[editor_stack.length -1]][i]["name"] === data.columns[j]["Field"]){
-
                             var required = "";
                             var required_asterisk = "";
-
                             if(typeof window["orderedColumns_" + editor_stack[editor_stack.length -1]][i]["required"] != "undefined" && window["orderedColumns_" + editor_stack[editor_stack.length -1]][i]["required"]){
                                 required = "required";
                                 required_asterisk = "*";
                             }
-
                             if(data.columns[j]["Field"].indexOf("imagen") >= 0 || data.columns[j]["Field"].indexOf("image") >= 0 || data.columns[j]["Field"].indexOf("img") >= 0 || data.columns[j]["Field"].indexOf("file") >= 0 || data.columns[j]["Field"].indexOf("archivo") >= 0){
                                 data.columns[j]["type"] = "file";
                             }
-
                             if(data.columns[j]["type"] !== "textarea"){
 
                                 // Find if the actual column has a Key value of 
@@ -93,10 +84,8 @@ $(document).ready(function(){
                                         </select>\n\
                                         </div>\n\
                                         </div>';
-                                }else{
-                                    
+                                }else{                                    
                                     if(data.columns[j]["Field"].indexOf("imagen") >= 0 || data.columns[j]["Field"].indexOf("image") >= 0 || data.columns[j]["Field"].indexOf("img") >= 0){
-
                                         html = '<div class="form-group">\n\
                                             <label class="control-label col-md-3 imagen" for="' + data.columns[j]["Field"]  + '">' + getCurrentWord(data.columns[j]["Field"]) + ' ' + required_asterisk + '</label>\n\
                                             <div class="col-md-8">\n\
@@ -106,29 +95,22 @@ $(document).ready(function(){
                                             <input type="file" class="form-control hidden ' + data.columns[j]["Field"] + '" name="' + data.columns[j]["Field"] + '" id="' + data.columns[j]["Field"] + '" onchange="archivo()" ' + required + '>\n\
                                             </div>\n\
                                             </div>';
-
-                                    }else if(data.columns[j]["Field"].indexOf("file") >= 0 || data.columns[j]["Field"].indexOf("archivo") >= 0){
-                                        
+                                    }else if(data.columns[j]["Field"].indexOf("file") >= 0 || data.columns[j]["Field"].indexOf("archivo") >= 0){                                        
                                         html = '<div class="form-group">\n\
                                             <label class="control-label col-md-3 ' + data.columns[j]["Field"]  + '" for="' + data.columns[j]["Field"]  + '">' + getCurrentWord(data.columns[j]["Field"])  + '  ' + required_asterisk + '</label>\n\
                                             <div class="col-md-8">\n\
                                             <input name="' + data.columns[j]["Field"] + '" type="' + data.columns[j]["type"] + '" class="form-control" value="" placeholder="' + getCurrentWord(data.columns[j]["Field"]) + '" ' + required + '>\n\
                                             </div>\n\
                                             </div>';
-
                                     }else{
-
                                         html = '<div class="form-group">\n\
                                             <label class="control-label col-md-3 ' + data.columns[j]["Field"]  + '" for="' + data.columns[j]["Field"]  + '">' + getCurrentWord(data.columns[j]["Field"])  + '  ' + required_asterisk + '</label>\n\
                                             <div class="col-md-8">\n\
                                             <input name="' + data.columns[j]["Field"] + '" type="' + data.columns[j]["type"] + '" class="form-control" value="" placeholder="' + getCurrentWord(data.columns[j]["Field"]) + '" ' + required + '>\n\
                                             </div>\n\
                                             </div>';
-
                                     }
-
                                 }
-
                             }else{
                                 html = '<div class="form-group">\n\
                                     <label class="control-label col-md-3 ' + data.columns[j]["Field"]  + '" for="' + data.columns[j]["Field"]  + '">' + getCurrentWord(data.columns[j]["Field"])  + '  ' + required_asterisk + '</label>\n\
@@ -137,7 +119,6 @@ $(document).ready(function(){
                                     </div>\n\
                                     </div>';
                             }
-
                             $("form#" + editor_stack[editor_stack.length-1] + " .my-inputs").append(html);
 
                             // Hides the primary key field
@@ -148,9 +129,7 @@ $(document).ready(function(){
                             // Terminate the loop to skip unnecesary iterations
                             break;
                         }
-
                     }
-
                 }
 
                 // Put the action button
@@ -179,7 +158,6 @@ $(document).ready(function(){
                 }else{
                     $("form#" + editor_stack[editor_stack.length-1] + " input[name='" + window["key_" + editor_stack[editor_stack.length-1]] + "']").attr("required", "required");
                 }
-
                 for(i in data.columns){
 
                     // Establece el campo predeterminado si está establedido
@@ -188,9 +166,16 @@ $(document).ready(function(){
                         $("form#" + editor_stack[editor_stack.length-1] + " select[name='" + data.columns[i]["Field"] + "'] > .default").removeAttr("disabled");
                         $("form#" + editor_stack[editor_stack.length-1] + " select[name='" + data.columns[i]["Field"] + "'] > .default").val(data.clean[0][data.columns[i]["Field"]])
                     }
-
+                    // Verificar si existe un documento con el mismo ID de avance y tipo de documento = 3
+                    // Si existe, mostrar un mensaje y evitar que se guarde el nuevo documento
+                    console.log("com_edi_171: ", data.rows[0][data.columns[0]['Field']] );
+                    console.log("com_edi_172: ", data.rows[0].tipo_documento);
+                    if (data.rows[0][data.columns[0]['Field']] !== null && data.rows[0].tipo_documento === "Proyecto final") {
+                        alert('Ya hay un archivo final guardado para este proyecto.');
+                        // return false;
+                        event.preventDefault(); // Evita el envío del formulario
+                    }
                     if(data.columns[i]["type"] !=="textarea"){
-
                         if(data.columns[i]["Field"].indexOf("imagen") >= 0 || data.columns[i]["Field"].indexOf("image") >= 0 || data.columns[i]["Field"].indexOf("img") >= 0){
                             if(data.rows[0][data.columns[i]["Field"]] !== ""){
                                 var imgPath = location.pathname.split("/");
@@ -199,78 +184,60 @@ $(document).ready(function(){
                                 $("img#selected-img").attr("src", imgPath);
                             }
                         }else if(data.columns[i]["Field"].indexOf("file") >= 0 || data.columns[i]["Field"].indexOf("archivo") >= 0){
-                            
+
                             // Que hacer si es un archivo lo que debe ir ahí
                             if(data.rows[0][data.columns[i]["Field"]] !== null){
-                                
-                                console.log(data.rows[0]);
-                                console.log(data.rows[0][data.columns[i]["Field"]]);
-                                console.log(data.columns[i]["Field"]);
-
-                                var filePath = location.pathname.split("/");
-                                filePath = filePath[1];
-                                filePath = location.origin + "/" + filePath + "/documents/" + whereAmI + "/" + data.rows[0][data.columns[i]["Field"]];
-                                
-                                var icon = "fa fa-folder-open";
+                                    
+                                    var filePath = location.pathname.split("/");
+                                    filePath = filePath[1];
+                                    filePath = location.origin + "/" + filePath + "/documents/" + whereAmI + "/" + data.rows[0][data.columns[i]["Field"]]; 
+                                    console.log("com_edi_185", filePath);                               
+                                    var icon = "fa fa-folder-open";
+                                    console.log("com_edit_187", data.rows[0][data.columns[i]["Field"]].split(".")[1]);
 
                                 switch (data.rows[0][data.columns[i]["Field"]].split(".")[1]) {
                                     case "doc":
                                         icon = "fa fa-file-word-o";
                                         break;
-
                                     case "docx":
                                         icon = "fa fa-file-word-o";
-                                        break;
-                                
+                                        break;                                
                                     case "pdf":
                                         icon = "fa fa-file-pdf-o";
                                         break;
-
-
                                     case "gif":
                                         icon = "fa fa-file-image-o";
                                         break;
-
                                     case "jpg":
                                         icon = "fa fa-file-image-o";
                                         break;
-
                                     case "png":
                                         icon = "fa fa-file-image-o";
                                         break;
-
                                     case "jpeg":
                                         icon = "fa fa-file-image-o";
                                         break;
-
                                     case "svg":
                                         icon = "fa fa-file-image-o";
                                         break;
-
                                     case "jfif":
                                         icon = "fa fa-file-image-o";
                                         break;
-
                                     case "xls":
                                         icon = "fa fa-file-excel-o";
                                         break;
-
                                     case "xlsx":
                                         icon = "fa fa-file-excel-o";
                                         break;
-
                                     case "XLSX":
                                         icon = "fa fa-file-excel-o";
                                         break;
-
                                     case "txt":
                                         icon = "fa fa-file-text-o";
                                         break;
-
                                     default:
                                         break;
                                 }
-
                                 $("form#" + editor_stack[editor_stack.length-1] + " input[name='" + data.columns[i]["Field"] + "']")
                                         .parent()
                                         .addClass("col-md-4")
@@ -323,12 +290,9 @@ $(document).ready(function(){
                                 $("form#" + editor_stack[editor_stack.length-1] + " select[name='" + window["selectRestrictions_" + editor_stack[editor_stack.length-1]][s]["field_name"] + "']").selectpicker("destroy");
                                 $("form#" + editor_stack[editor_stack.length-1] + " select[name='" + window["selectRestrictions_" + editor_stack[editor_stack.length-1]][s]["field_name"] + "']").html('<option selected disabled value class="default">' + getCurrentWord(window["selectRestrictions_" + editor_stack[editor_stack.length-1]][s]["field_name"]) + '</option>');
                             }
-                        }
-                        
-                    }
-                    
-                }
-                
+                        }                        
+                    }                    
+                }                
             });
 
             // When a user clicks over a clean select loads the required options for the given select element
@@ -370,19 +334,14 @@ $(document).ready(function(){
                                     myUrl += $("form#" + editor_stack[editor_stack.length-1] + " select[name='" + window["selectRestrictions_" + editor_stack[editor_stack.length-1]][s]["requires"] + "']").val();
                                     
                                 }else{
-
                                     show = false;
                                     alert("Requerido: " + getCurrentWord(window["selectRestrictions_" + editor_stack[editor_stack.length-1]][s]["requires"]));
-
                                 }
                                 break;
                             }
-                        }
-                        
-                    }
-                    
-                }
-                    
+                        }                        
+                    }                    
+                }                    
                 if(show){
 
                     // Obtains the resource data form API
@@ -412,62 +371,47 @@ $(document).ready(function(){
                             // Find the first column corresponding to "name" or "nombre"
                             for(i in data.columns){
                                 if(data.columns[i]["Field"].indexOf("name") >= 0 || data.columns[i]["Field"].indexOf("nombre") >= 0){
-                                    columnName = data.columns[i]["Field"];                                        
+                                    columnName = data.columns[i]["Field"];                            
                                     break;
                                 }
                             }
-
-
                             var html = "";
 
                             // Verifica si se deben poner datos adicionales al select
                             if(window["selectData_" + editor_stack[editor_stack.length-1]] !== undefined){
-                                for(i in data.rows){
-                                    
-                                    attrData = "";
-                                    
-                                    // Si existe el objeto con los datos a agragar revisa que exista para para el campo actual
+                                for(i in data.rows){                                    
+                                    attrData = "";                                    
+                                    // Si existe el objeto con los datos a agregar revisa que exista para el campo actual
                                     for(d in window["selectData_" + editor_stack[editor_stack.length-1]]){
                                         if(window["selectData_" + editor_stack[editor_stack.length-1]][d]["field_name"] === field){
-                                            
+                                            console.log("424: ", field);
                                             // Agrega los campos data requeridos
                                             for(sd in window["selectData_" + editor_stack[editor_stack.length-1]][d]["data"]){
                                                 attrData += "data-" + window["selectData_" + editor_stack[editor_stack.length-1]][d]["data"][sd] + "='" + data.rows[i][window["selectData_" + editor_stack[editor_stack.length-1]][d]["data"][sd]] + "' ";
-                                            }
-                                            
+                                            }                                            
                                             break;
                                         }
-                                    }
-                                    
-                                    html += "<option value='" + data.rows[i][idName] + "' " + attrData + ">" + data.rows[i][columnName] + "</option>";
-                                    
+                                    }                                    
+                                    html += "<option value='" + data.rows[i][idName] + "' " + attrData + ">" + data.rows[i][columnName] + "</option>";                                    
                                 }
                             }else{
                                 for(i in data.rows){
                                     html += "<option value='" + data.rows[i][idName] + "'>" + data.rows[i][columnName] + "</option>";
                                 }
                             }
-
                             $("form#" + editor_stack[editor_stack.length-1] + " select[name='" + field + "']").html(html);
-
                             $("form#" + editor_stack[editor_stack.length-1] + " select[name='" + field + "']").addClass("selectpicker");
 
                             // Enable select2 plugin
                             $('.selectpicker').selectpicker();
-
                             $("button[data-id='" + field + "']").click();
-                            
                             try{
                                 // Always declare this function to do something before loading the table
                                 commonAfterSelect(field);
                             }catch(e){}
-
                         }
-
-                    });
-                    
+                    });                    
                 }
-
             });
             
             // When the form is sent to execute the given action
@@ -490,8 +434,9 @@ $(document).ready(function(){
 
                 // Almacena el formulario para enviarlo como objeto Formulario
                 // Esto es útil por si es necesario enviar archivos o imágenes
-                var form = $("form#" + editor_stack[editor_stack.length-1])[0];
-                var formData = new FormData(form);
+                    var form = $("form#" + editor_stack[editor_stack.length-1])[0];
+                    var formData = new FormData(form);
+                    console.log("com_edit_440:", formData );
 
                 $.ajax({
                     type: 'POST',
@@ -506,11 +451,9 @@ $(document).ready(function(){
                         alert(textStatus + ": " + errorThrown);
                     },
                     success : function (data, textStatus, jqXHR) {
-
                         if(typeof data === "string"){
                             data = JSON.parse(data);
-                        }
-                        
+                        }                        
                         if(data.status){
 
                             // Este objeto contentdrá la información acutalizada
@@ -547,17 +490,14 @@ $(document).ready(function(){
                                 if(all[i]["name"] !== window["key_" + editor_stack[editor_stack.length-1]]){
                                     obj[all[i]["name"]] = all[i]["value"];
                                 }
-                            }
-                            
+                            }                            
                             if(action === "edit"){
                                 // Actualiza la tabla relacionada al editor actual con la información del formulario
                                 window.current_row.val(obj);
                             }else{
                                 // Agrega el nuevo registro a la tabla del editor actual
                                 window["ft_" + editor_stack[editor_stack.length-1]].rows.add(obj);
-
-                            }
-                            
+                            }                            
                             try{
                                 // Always declare this function to do something after loading the table
                                 commonSuccessEditor(data);
@@ -583,23 +523,24 @@ $(document).ready(function(){
                             
                             // Carga el editor actual en el div correspondiente.
                             $("div#div_editor_" + editor_stack[editor_stack.length-1]).load(url, function (result, status, xhr) {
-
                                 if (status === 'error') {
                                     alert(status + ": " + xhr.status + " (" + xhr.statusText + ")");
                                 }else{
-                                    
-                                    alert(getCurrentWord("txt_n_correct"));
-                                }
-                                
+                                    // Verificar si existe un documento con el mismo ID de avance y tipo de documento = 3
+                                    // Si existe, mostrar un mensaje y evitar que se guarde el nuevo documento
+                                    console.log("com_edi_522: ", data.rows[0][data.columns[0]['Field']] );
+                                    console.log("com_edi_523: ", data.rows[0].tipo_documento);
+                                    if (data.rows[0][data.columns[0]['Field']] !== null && data.rows[0].tipo_documento === "Proyecto final") {
+                                        alert('Ya hay un archivo final guardado para este proyecto.');
+                                        return false;
+                                    }else{
+                                        alert(getCurrentWord("txt_n_correct"));
+                                    }
+                                }                                
                             });
-
-
-                        }
-                        
+                        }                        
                     }
-
-                });
-                
+                });                
             });
             
             // Action when the close button is clicked
@@ -638,8 +579,7 @@ $(document).ready(function(){
                         success: function (data, textStatus, jqXHR) {
                             locks_stack.pop();
                         }
-                    });
-                    
+                    });                    
                 }
                 
                 // Si al quitar el editor de la pila queda vacía muestra la tabla de la sección actual
@@ -665,28 +605,21 @@ $(document).ready(function(){
                     if(!$("nav#sidebar").hasClass("active")){
                         $("button#sidebarCollapse").click();
                     }
-
                 }else{
                     
                     // Establece la acción por defecto para el editor previo
-                    action = "edit";
-                    
+                    action = "edit";                    
                 }
                 
                 // Muestra las opciones de la barra lateral
-                $("#mySidebar a").css("display", "");
-                
+                $("#mySidebar a").css("display", "");                
             });
-
             try{
                 // Always declare this function to do something after loading the table
                 commonAfterEditor();
             }catch(e){}
-
         }
-
     });
-    
 });
 
 // Updates the plus/munus glyphicon
@@ -732,23 +665,17 @@ function archivo() {
             $("input[type='file']").val("");
             continue;
         }else{
-
             if(f.type != "image/webp"){
-
                 var reader = new FileReader();
-
                 reader.onload = function (e) {
                     // Shows the image preview replacing the default image
                     $("img#selected-img").attr('src', e.target.result);
                 }
                 reader.readAsDataURL(f);
-
             }else{
                 alert("Formato desconocido.");
                 $("input[type='file']").val("");
             }
-
         }
     }
-
 }

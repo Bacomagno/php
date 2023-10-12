@@ -47,7 +47,6 @@ class Panel_admin extends Common_panel_admin {
                 $post["log_timestamp"] = date("Y-m-d h:m:s");
 
                 $id = $this->model->insert($post);
-
                 //Si el usario escogió almenos una imágen
                 if (!empty($_FILES)) {
                     foreach ($_FILES as $key => $value) {
@@ -69,14 +68,6 @@ class Panel_admin extends Common_panel_admin {
                         }
                     }
                 }
-
-                /*$uri = $_SERVER["REQUEST_URI"];
-                $uri = explode("/", $uri);
-
-                if($uri[sizeof($uri) - 1] === "tom_trademarks"){
-                    echo "Es trademarks";
-                }*/
-
                 $result = array(
                     'index' => $id,
                     'status' => true
@@ -84,7 +75,6 @@ class Panel_admin extends Common_panel_admin {
                 echo json_encode($result);
 
             } else {
-
                 $result = array(
                     'index' => null,
                     'status' => false

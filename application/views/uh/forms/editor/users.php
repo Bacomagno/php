@@ -21,7 +21,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 <div id="collapse2" class="panel-collapse collapse in">
                     <div class="panel-body">
                         <div class="row">
-                            <div class="col-md-8 col-md-offset-2 my-inputs"></div>                            
+                            <!-- <div class="col-md-8 col-md-offset-2 my-inputs"></div>-->
                         </div>
                     </div>
                 </div>

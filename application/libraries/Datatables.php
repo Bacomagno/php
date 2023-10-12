@@ -42,6 +42,7 @@
     {
       $this->ci =& get_instance();
     }
+
     /**
     * If you establish multiple databases in config/database.php this will allow you to
     * set the database (other than $active_group) - more info: http://ellislab.com/forums/viewthread/145901/#712942
@@ -70,6 +71,7 @@
       $this->ci->db->select($columns, $backtick_protect);
       return $this;
     }
+
     /**
     * Generates the DISTINCT portion of the query
     *
@@ -517,7 +519,8 @@
         if(is_string($result))
         {
           static $jsonReplaces = array(array('\', \'/', '
-', '	', '', '\b', '', '"'), array('\\', '\/', '\n', '\t', '\r', '\b', '\f', '"'));
+', '	', '
+', '\b', '', '"'), array('\\', '\/', '\n', '\t', '\r', '\b', '\f', '"'));
           return '"' . str_replace($jsonReplaces[0], $jsonReplaces[1], $result) . '"';
         }
         else

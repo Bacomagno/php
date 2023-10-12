@@ -78,9 +78,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     // Set to "false" if you want to create the form manually
     var genFormAuto = true;
         
-    // $.getScript(location.protocol + '//' + location.host + '/' + location.pathname.split("/")[1] + '/assets/js/common_editor.js', function () {});
+    $.getScript(location.protocol + '//' + location.host + '/' + location.pathname.split("/")[1] + '/assets/js/common_editor.js', function () {});
 
-    $.getScript(location.protocol + '//' + location.host + '/' + '/assets/js/common_editor.js', function () {});
+    // $.getScript(location.protocol + '//' + location.host + '/' + '/assets/js/common_editor.js', function () {});
 
 
 </script>
